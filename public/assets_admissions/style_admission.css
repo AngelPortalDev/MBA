@@ -1,0 +1,352 @@
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: #f1f5f9;
+    font-family: Inter, sans-serif;
+}
+
+body {
+    overflow-x: hidden
+}
+
+.eascencia_logo {
+    width: 139px;
+    height: 51px;
+    position: absolute;
+    top: 15%;
+    left: 12%
+}
+
+.btnstyle {
+    /* font-family: Raleway, Sans-serif; */
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-radius: 8px;
+    padding: 8px 20px;
+    top: 16px;
+    left: 14px;
+    line-height: 30px;
+    position: absolute;
+    background-color: #2b3990;
+}
+.btnstyle:hover{
+    background-color: #191913;
+}
+
+.malta_heading_title,
+.malta_sub_heading {
+    /* font-family: Raleway, Sans-serif; */
+    font-weight: 900;
+    text-transform: uppercase
+}
+
+.ascencia_malta_logo_style {
+    width: 200px;
+    height: 80px;
+    border-radius: 16px 0 0 16px;
+    position: relative;
+    border: 1px solid #fff;
+    overflow: hidden
+}
+
+.navtopbar {
+    background: #020101;
+    height: 80px; 
+    border-radius: 18px;
+    box-shadow: 0px 0px 50px -20px rgba(0, 0, 0, 0.4);
+}
+
+.home_page {
+    padding: 200px 0 60px;
+}
+
+.malta_heading_title {
+    color: #191913;
+    font-size: 50px;
+    line-height: 58px
+}
+
+.malta_sub_heading {
+    color: #2b3990;
+    font-size: 31px;
+    line-height: 40px
+}
+
+.malta_offer_title {
+    color: #191913;
+    /* font-family: "Open Sans", Sans-serif; */
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 30px
+}
+
+.study_benifi_list span,
+.study_benifit_title {
+    /* font-family: "Quattrocento Sans", Sans-serif; */
+    margin-left: 5px
+}
+
+.study_benifi_list span {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.study_benifi_list .check-icon {
+    color: #bc0f2c;
+    font-size: 1.5rem;
+    font-weight: 600 !important
+}
+
+.study_benifi_list li {
+    display: flex;
+    align-items: center;
+    line-height: 30px;
+}
+
+.bi::before,
+[class*=" bi-"]::before {
+    font-weight: 700 !important
+}
+
+.study_benifit_title {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 0
+}
+
+.malta_form_column {
+    display: flex;
+    justify-content: end
+}
+
+.malta_lead_form {
+    width: 496px;
+    height: auto
+}
+
+.about_us_heading {
+    color: #2b3990;
+    /* font-family: Raleway, Sans-serif; */
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 28px;
+    letter-spacing: 0;
+    margin-top: 10rem
+}
+
+.about_us_title,
+.our_mission_section_title,
+.program_section_title {
+    color: #191913;
+    /* font-family: Raleway, Sans-serif; */
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 45px
+}
+
+.malta_description,
+.program_description {
+    color: #191913;
+    /* font-family: "Open Sans", Sans-serif; */
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 30px
+}
+
+.apply_btn_style,
+.program_heading_section {
+    /* font-family: Raleway, Sans-serif; */
+    text-transform: uppercase
+}
+
+.program_heading_section {
+    color: #bc0f2c;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0
+}
+
+.apply_btn_style {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: .5px;
+    background: linear-gradient(to right, #d5213f 50%, #bc0f2c 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: .4s;
+    padding: 10px 20px;
+    margin-top: 2rem
+}
+
+.campus_notes,
+.campus_right_column {
+    background-color: #191914
+}
+
+.our_program_section {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 120px 0 60px
+}
+
+.our_program_course_title {
+    /* font-family: "Futura Bold", Sans-serif; */
+    font-weight: 700;
+    color: #222218
+}
+
+.campus_notes_heading,
+.our_mission_section_heading {
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 28px;
+    letter-spacing: 0;
+    /* font-family: Raleway, Sans-serif */
+}
+
+.button_wrapper_program {
+    margin-top: 40px
+}
+
+.button_wrapper_apply_now .apply_now_btn_style,
+.button_wrapper_program .apply_now_btn_style {
+    padding: 12px 24px;
+    background-color: #bc0f2c !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    font-size: 13px
+}
+
+.button_wrapper_apply_now .apply_now_btn_style:hover,
+.button_wrapper_program .apply_now_btn_style:hover {
+    background-color: #dc3545 !important
+}
+
+.our_mission_section {
+    padding: 120px 0 60px;
+    background-image: url("../assets/imgs/mission_background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover
+}
+
+.our_mission_section_heading {
+    color: #bc0f2c
+}
+
+.button_wrapper_apply_now {
+    margin-top: 60px !important
+}
+
+.campus_notes {
+    padding: 0 20% 0 10%;
+    color: #fff;
+    align-content: center
+}
+
+.campus_notes_heading {
+    color: #fff
+}
+
+.campus_notes_title {
+    color: #fff;
+    /* font-family: Raleway, Sans-serif; */
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 45px
+}
+
+.campus_description {
+    color: #fff;
+    /* font-family: "Open Sans", Sans-serif; */
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px
+}
+
+.program_description_main {
+    background-color: #bc0f2c;
+    color: #fff;
+    height: 1.7rem;
+    width: 1.7rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1rem
+}
+
+.program_description_icon {
+    font-size: 1rem
+}
+
+.our_program_course_title {
+    font-size: 1.5rem;
+    margin-left: .5rem;
+    line-height: 1.5
+}
+
+.our_mission_section_icon_style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    margin-left: 2px;
+    height: 20px;
+    width: 20px
+}
+
+.mission_chev_icon_style i {
+    font-size: 1.2rem
+}
+
+.our_mission_title {
+    font-size: 1rem;
+    line-height: 1.5
+}
+
+.my_icon {
+    font-size: 1.2rem;
+    background: #222218;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff
+}
+
+.my_icon:hover {
+    background: #bc0f2c
+}
+
+
+
+
+/* New styling */
+
+.bi-check-circle{
+    color: #38A169;
+}
+
+.study_benifi_list span{
+    color: #64748b;
+}
+
+.about-us-values{
+    background-color: white !important;
+}
+
+.card-body h4{
+    font-size: 22px;
+}

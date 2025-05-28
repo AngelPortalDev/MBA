@@ -1,0 +1,10 @@
+User-agent: *
+
+Disallow: /register/
+Disallow: /login/
+Disallow: /resendOTP/
+Disallow: /student-enrollment/
+Disallow: /login-view/
+
+
+

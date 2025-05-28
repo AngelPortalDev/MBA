@@ -1,0 +1,396 @@
+<!-- Header import -->
+@extends('admin.layouts.main')
+@section('content')
+
+
+    <!-- Container fluid -->
+    <section class="container-fluid p-4">
+        <div class="row justify-content-between ">
+            <!-- Page Header -->
+            <div class="col-lg-4 col-12">
+                <div class=" pb-3 mb-3 d-flex justify-content-between align-items-center">
+                    <div class="mb-2 mb-lg-0">
+                        <h1 class="mb-1 h2 fw-bold">
+                            Forum leadership
+                            <span class="fs-5" id="count">(0)</span>
+                        </h1>
+                        <!-- Breadcrumb  -->
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Forum leadership</a></li>
+                                <!-- <li class="breadcrumb-item active" aria-current="page">All Admin</li> -->
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="nav btn-group" role="tablist">
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- <form class="d-flex align-items-center col-12 col-lg-3"> -->
+                <div class="col-lg-8 col-12 text-end pt-2 mb-0 mb-sm-3">
+                    <div class="d-sm-flex justify-content-sm-end">
+                          <!-- Button With Icon -->
+                          <div class="d-grid d-sm-block ms-2 d-md-0 mt-2 mt-md-0">
+                            <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#discordView">
+                                Create <i class="fe fe-plus ms-1"></i>
+                            </button>
+                          </div>
+                          {{-- <div class="d-grid d-sm-block ms-2 d-md-0 mt-2 mt-md-0">
+                            <button type="button" class="btn btn-outline-primary ">
+                                Delete <i class="fe fe-trash ms-1"></i>
+                            </button>
+                          </div> --}}
+                    </div>
+                </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12 mt-3 mt-md-0">
+                <!-- Card -->
+                <div class="card rounded-3">
+                    <!-- Card Header -->
+                    <div class="p-4 row">
+                        <div class="card-header p-0 col-12 col-md-7 col-lg-7">
+                            <ul class="nav nav-lb-tab border-bottom-0" id="tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="all-students-tab" data-bs-toggle="pill" href="#all-students" role="tab" aria-controls="all-students" aria-selected="true">All</a>
+                                </li>
+
+                                <li class="nav-item" role="presentation">
+                                    {{-- <a class="nav-link" id="deleted-e-mentor-tab" data-bs-toggle="pill" href="#deleted-e-mentor" role="tab" aria-controls="deleted-e-mentor" aria-selected="false" tabindex="-1">Deleted</a> --}}
+                                </li>
+                            </ul>
+                        </div>
+
+                    
+                        <!-- Form -->
+
+                       
+                        <div class="d-flex align-items-center col-12 col-md-5 col-lg-5 justify-content-end border-bottom">
+                            <div class="row justify-content-end">
+                                <form class="d-flex align-items-center col-lg-8 col-md-12 col-sm-12 mt-2 mt-md-0 mb-2 mb-md-0 w-100">
+                                    <span class="position-absolute ps-3 search-icon">
+                                        <i class="fe fe-search"></i>
+                                    </span>
+                                    <input type="search" class="form-control ps-6 searchDiscord" id="searchInput" placeholder="Search Here">
+                                </form>
+
+                            
+                                <!-- input -->
+                                {{-- <div class="col-lg-6 col-md-12 col-sm-12 mt-2 mt-lg-0 mb-2 mb-lg-0">
+                                    <!-- form select -->
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected="">Filter</option>
+                                        <option value="Newest">Newest</option>
+                                        <option value="Price: Low-High">Delected</option>
+                                        <option value="Price: Low-High">Award</option>
+
+                                    </select>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div class="tab-content" id="tabContent">
+                            <!-- Tab -->
+
+                            <!-- All Students Tab  -->
+                            <div class="tab-pane fade active show" id="all-students" role="tabpanel" aria-labelledby="all-students-tab">
+                                <div class="table-responsive">
+                                    <!-- Table -->
+                                    <table class="table mb-0 text-nowrap table-hover table-centered table-with-checkbox table-centered table-hover contentList w-100">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="checkAll">
+                                                        <label class="form-check-label" for="checkAll"></label>
+                                                    </div>
+                                                </th>
+                                                <th>Sr. No.</th>
+                                                <th>Assigned to Course</th>
+                                                <th>Total Percentage (%)</th>
+                                                <th>Marks</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{{-- Add Discord --}}
+<div class="modal fade" id="discordView" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskModalLabel">Create Forum Leadership</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row needs-validation discord-section" id="addDiscordData"  novalidate class="">
+                    <div class="mb-3 col-12">
+                        <label for="Select Award" class="form-label">Select Award <span class="text-danger">*</span></label>
+                        <select class="form-select select2" id="award_id" name="award_id" >
+                            <option value="">Select Award Course</option>  
+                            @php 
+                            $data = DB::table('course_master')
+                                ->select('id', 'course_title')
+                                ->where('category_id', 1)
+                                ->whereIn('status', [1, 3])
+                                ->orderBy('id', 'DESC')
+                                ->get();
+                            @endphp
+                            @foreach ($data as $list)
+                                <option value="{{base64_encode($list->id)}}">{{$list->course_title}}</option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback" id="discord_award_error">Please select award</div>
+                    </div>
+                    <div class="mb-2 col-12">
+                        <div class="row">
+                            <div class="col">
+                                <label for="DiscordPercentage" class="form-label">Total Percentage <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="percentage" id="percentage" placeholder="Total Percentage" required>
+                                {{-- <small class="mt-1">Please enter percentage</small> --}}
+
+                                <div class="invalid-feedback mt-0" id="percentage_error">Please enter percentage.</div>
+                            </div>
+                            <div class="col">
+                                <label for="DiscordMarks" class="form-label">Marks <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="marks" id="marks" placeholder="Enter Marks" required>
+                                {{-- <small class="mt-1">Please enter marks</small> --}}
+
+                                <div class="invalid-feedback mt-0" id="marks_error">Please enter marks.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end pt-2">
+                        <button type="button" class="btn btn-primary me-2" id="addDiscord">Add</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Edit Discord --}}
+<div class="modal fade" id="editdiscordView" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskModalLabel">Edit Forum Leadership</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row needs-validation discord-section discordFormData" novalidate class="">
+                    <input type="text" id="discord_id" name="discord_id" value="" hidden>
+                    <div class="mb-3 col-12">
+                        <label for="Select Award" class="form-label">Select Award <span class="text-danger">*</span></label>
+                        <input type="text" id="award_id_edit" name="award_id" class="form-control" 
+                        value="" placeholder="Award Course" required disabled>
+                    </div>
+                    <div class="mb-2 col-12">
+                        <div class="row">
+                            <div class="col">
+                                <label for="DiscordPercentage" class="form-label">Total Percentage <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="percentage" id="percentage_edit" placeholder="Total Percentage" required value="">
+                                {{-- <small class="mt-1">Please enter percentage.</small> --}}
+                                <div class="invalid-feedback" id="percentage_error">Please enter percentage</div>
+                            </div>
+                            <div class="col">
+                                <label for="DiscordMarks" class="form-label">Marks <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="marks" id="marks_edit" placeholder="Enter Marks" required value="">
+                                {{-- <small class="mt-1">Please enter marks.</small> --}}
+                                <div class="invalid-feedback" id="marks_error">Please enter marks</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end pt-2">
+                        <button type="button" class="btn btn-primary me-2 updateDiscord">Edit</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        list(btoa('All'));
+
+        handleSearchInput('searchInput', function() {
+        list(btoa('All')); // Reload with default filter on clear
+    });
+
+        function list(action='') {
+            $("#processingLoader").fadeIn();
+            var list = $(".contentList").DataTable();
+            var baseUrl = window.location.origin + "/";
+            // list.destroy();
+            var condition =  action !='' ? action : btoa('ALL');
+            
+            $.ajax({
+                url: baseUrl + "admin/discord-data/"+condition,
+                method: "GET",
+                success: function (data) {
+                    $("#processingLoader").fadeOut();
+                    $(".contentList").DataTable().destroy();
+                    $('#count').html("("+data.length+")");
+                    $(".contentList").DataTable({
+                        data: data, 
+                        columns: [
+                            {
+                                data: "id",
+                                render: function (data, type, full, meta) {
+                                    var CourseId = btoa(data);
+                                    var isChecked = full.checked ? "checked" : "";
+                                    return (
+                                        '<form class="actionData"><input type="checkbox" class="form-check-input checkbox sub_chk " name="userId[]" value="' +
+                                        CourseId +
+                                        '" ' +
+                                        isChecked +
+                                        "></form>"
+                                    );
+                                },
+                                width:'0%',
+                            },
+                            {
+                                data: null,
+                                render: function (data, type, full, row) {
+                                    i = row.row + 1;
+                                    return i;
+                                },
+                                width:'10%',
+                            },
+                            {
+                                data: null,
+                                render: function (data) {
+                                    var course_title =  data['award_course'] && data['award_course']['course_title'] != null ?  data['award_course']['course_title'] : '';
+                                    return(
+                                        "<div class='d-flex align-items-center'><div></div><div class=''><p class='mb-1 text-wrap-title '>" +
+                                            course_title +
+                                        "</p>"
+                                    )
+                                        
+                                },
+                                width:"35%",
+                            },
+                            {
+                                data: null,
+                                render: function (data) {
+                                    var percentage = data.percentage;
+                                    return percentage;
+                                },
+                                width:"20%",
+                            },
+                            {
+                                data: null,
+                                render: function (data) {
+                                    var marks = data.marks;
+                                    return marks;
+                                },
+                                width:"20%",
+                            },
+                            {
+                                data: null,
+                                render: function (row) {
+                                    var assignId = btoa(row.id);
+                                    var courseId = btoa(row.award_id);
+                                    
+                                    var action = btoa("edit");
+                                    var editUrl =
+                                        baseUrl +
+                                        "admin/discord-data-edit/" +
+                                        action +
+                                        "/" +
+                                        assignId;
+                                        
+                                    return (
+                                        '<div class="hstack gap-3"><a href="javascript:void(0);" data-assign-id="' + assignId + '" data-course-id="' + courseId + '" data-bs-toggle="tooltip" data-placement="top" title="Edit" class="open-edit-modal"><i class="fe fe-edit"></i></a><a href="javascript:void(0);"  class="deleteForumLeadership" data-assign_id="'+assignId+'" data-course_id="'+courseId+'" data-bs-toggle="tooltip" data-placement="top" title="Delete" ><i class="fe fe-trash"></i></a></div>'
+                                    );
+                                },
+                                width:'15%'
+                            },
+                        ],
+                    });
+                },
+                error: function (xhr, status, error) {
+                    $("#processingLoader").fadeOut();
+                    console.error(xhr);
+                },
+            });
+        } 
+    
+        $(".list-tab").on("click", function (event) {
+            event.preventDefault();
+            list(btoa($(this).data("cat")));
+        });
+    });
+    $('.searchDiscord').on('keyup', function() {
+        var table = $('.contentList').DataTable();
+        var searchTerm = $(this).val();
+        table.search(searchTerm).draw();
+    });
+
+    $(document).on('click', '.open-edit-modal', function (e) {
+        e.preventDefault();
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        var assignId = $(this).data('assign-id');
+        var courseId = $(this).data('course-id');
+        var baseUrl = window.location.origin;
+        var action = btoa("edit");
+        $.ajax({
+            url: baseUrl + "/admin/discord-data-edit/" + action + "/" + assignId,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            success: function (response) {
+                
+                if (response.code === 200) {
+                    let data = response.data[0];
+                    $('#award_id_edit').val(data.award_course.course_title);
+                    $('#discord_id').val(btoa(data.id));
+                    $('#percentage_edit').val(data.percentage);
+                    $('#marks_edit').val(data.marks);
+                    $('#editdiscordView').modal('show');
+                } else {
+                }
+            },
+        });
+    });
+
+    $('#discordView').on('shown.bs.modal', function () {
+    $('#award_id').select2({
+        dropdownParent: $('#discordView'),
+        placeholder: "Select Award Course",
+    });
+});
+    
+</script>
+
+
+@endsection
+
+
+

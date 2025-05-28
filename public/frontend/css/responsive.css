@@ -1,0 +1,707 @@
+/* Max-width 1400px media  */
+@media screen and (max-width: 1400px) {
+    .browse-course-page .course-title {
+        font-size: 1.1rem;
+        padding-right: 20px;
+    }
+    .save_loader-bar{
+        margin: 10px auto !important;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .headersearchOffcampus{
+        display: none !important;
+     }
+     .institute-dashboard-card{
+        height: 95px;
+     }
+}
+
+@media screen and (max-width: 1200px) {
+    .navbar .navbar-nav .nav-item .nav-link{
+        border-bottom: 1px solid #e2e8f0;
+    }
+}
+
+
+/* Max-width 1200px media  */
+@media screen and (max-width: 1200px) {
+    .shoppingCartTotal{
+        font-size: 1rem;
+    }
+    .shoppingCartTotalCurrency{
+        font-size: 1rem;
+    }
+   /* .otp-verification{
+    width: 100%;
+   } */
+   .mobileinput{
+    width: 60%;
+   }
+   .navbar .navbar-nav .nav-item .nav-link{
+    padding: 8px 16px !important;
+}
+
+}
+
+@media screen and (min-width: 1200px) {
+    .trailer_thumbnail_file_style{
+        margin-top: 1.8rem;
+    }
+    .otp-verification .form-control{
+        padding: 10px 15px;
+    }
+    .otp-verification{
+        width: 75%;
+       }
+       .mobileinput{
+        width: 50%;
+       }
+       .dropdown-notification-menu{
+        right: 110px !important;
+       }
+       .searchIconforsmalldevice{
+        display: none;
+     }
+     .largedeviceicon{
+        display: none !important;
+     }
+    
+       /* #videoDisply{
+        height: 820px !important;
+        border: 0;
+        position: absolute;
+        top: 0;
+        width: 100% !important;
+       } */
+}
+
+/* Max-width 992px media  */
+@media screen and (max-width: 992px) {
+    .course-preview-column {
+        margin-top: 10px;
+    }
+    .navbar .navbar-nav .nav-item .nav-link{
+        padding: 8px 16px !important;
+    }
+    .sign-btns-main{
+        margin-bottom: 0 !important;
+    }
+    .courseDetailMentorCard{
+        margin-bottom: 5rem;
+    }
+    .dropdown-item-exam{
+        white-space: normal !important;
+    } 
+    .mobileVerification{
+        width: 75%;
+    }
+    .otp-verification{
+        width: 75%;
+       }
+       .flickering_text_styling{
+        font-size: 14px !important;
+        text-align: left !important;;
+    }
+    .researchProposal{
+        align-items: flex-start !important;
+        flex-direction: column !important;
+    }
+    .searchIconforsmalldevice{
+        display: none !important;
+     }
+
+     .largedeviceicon{
+        display: none !important;
+     }
+    /* .pending_approval{
+        display: block !important;
+    } */
+}
+
+/* Min-width 992px */
+@media screen and (min-width: 992px){
+    .dropdown-item-exam {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: auto;
+    }
+    .dropdown-item-exam {
+        white-space: normal;
+        /* width: 100%; */
+        padding: 5px 15px;
+    }
+    .mobileVerification{
+        width: 75%;
+     }
+     .mobileVerification .form-control{
+        padding: 8px 22px;
+     }
+   
+   
+     /* .navbar-expand-lg .headeroffcampusTwo{
+        background-color: #fff !important;
+        border: 0 !important;
+        flex-grow: 1;
+        height: auto !important;
+        position: fixed !important;
+        transform: none !important;
+        transition: none;
+        visibility: visible !important;
+        width: auto !important;
+     } */
+}
+
+
+@media only screen and (max-width: 1400px) and (min-width: 1200px){
+    .course-category-tabs-main .card-body{
+        height: 155px !important;
+    }
+    .promo_code_division{
+        display: flex !important;
+        align-items: center;
+        /* flex-direction: column !important; */
+    }
+    .promo_code_division .enroll_icon{
+        font-size: 12px;
+    }
+    .promo_code_division .badge_icon{
+        font-size: 10.25px;
+    }
+    .institute-dashboard-card{
+        height: 80px !important;
+    }
+    .headerSearch{
+        width: 200px !important;
+    }
+    .course-menubar-top{
+        width: 95px;
+    }
+}
+
+/* @media only screen and (max-width: 1400px) and (min-width: 1199px){
+    .course-menubar-top{
+        width: 95px;
+    }
+} */
+
+
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
+    .hero-section .carousel-control-prev{
+        left: -3.5vw;
+    }
+    .hero-section .carousel-control-next{
+        right: -3.5vw;
+    }
+    .learning-opportunitie-title{
+        max-width: 200px;
+    }
+    .ExamSubmissionForm{
+        width: 75% !important;
+    }
+    .e-mentor-card{
+        height: 175px !important;
+    }
+    .student-card-number{
+        font-size: 1.5rem !important;
+    }
+    .trailer_thumbnail_file_style{
+        margin-top: 3.5rem;
+    }
+    .mobileVerification{
+        width: 100%;
+     }
+     .mobileVerification .form-control{
+        padding: 8px 20px;
+     }
+    .select2-dropdown{
+        width: 304px !important;
+    }
+    .institute-dashboard-card{
+        /* height: 120px !important; */
+    }
+    .courseDuration{
+        display: flex;
+        flex-direction: column !important;
+    }
+    .searchIconDesktopHide{
+        display: none !important;
+    }
+    .headerSearch{
+        width: auto !important;
+    }
+    .largedeviceicon{
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 768px) {
+    /* .hero-section .carousel-control-prev{
+        left: -3.5vw;
+    }
+    .hero-section .carousel-control-next{
+        right: -3.5vw;
+    } */
+    .course-category-tabs-main .course-price{
+        font-size: 14px;
+    }
+    .course-price-flex .old-price{
+        font-size: 12px;
+    }
+    .footerResponsive .buy-now{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+    .mock-interview-customInput{
+        width: auto !important;
+    }
+    .headerSearch{
+        width: auto !important;
+    }
+}
+
+
+@media only screen and (max-width: 768px) and (min-width: 577px) {
+    .course-video-player-page .navbar-vertical{
+        max-width: 400px;
+        height: auto;
+        /* margin-left: -24rem !important; */
+        margin-left: -25rem !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #db-wrapper.toggled .customeNavbar {
+        margin-left: 0;
+    }
+    .customeNavbar {
+        margin-left: -25rem;
+    }
+    .course-video-player-page #menu-button {
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        padding: 20px 20px;
+        background-color: var(--secondary);
+    }
+    .sign-btns-main{
+        width: max-content;
+    } 
+  
+}
+
+@media screen and (max-width: 768px){
+    #db-wrapper.toggled #page-content {
+        margin-left: 0rem;
+    }
+    .section_heading{
+        font-size: 18px !important;
+    }
+    .course-item h4{
+        font-size: 15px !important;
+    }
+    .course-video-player-page-studentExamSection .navbar-vertical{
+        position: relative;
+        max-width: 300px;
+        /* max-width: 370px; */
+        height: auto;
+        margin-left: -19rem !important;
+    }
+
+    .course-video-player-page-studentExamSection .simplebar-content-wrapper .simplebar-content{
+        width: 300px;
+    }
+
+    #db-wrapper.toggled .navbar-vertical{
+        margin-left: 0 !important;
+    }
+    canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: scroll !important;
+    }
+    
+    .mobileinput{
+        width: 50%;
+       }
+       .file_upload_container, .terms-and-contion-check{
+        width: 100% !important;
+       }
+}
+
+/* Max-width 740px media  */
+@media screen and (max-width: 740px) {
+    /* #db-wrapper.toggled #page-content {
+        margin-left: 0rem;
+    } */
+    .mentormainsection {
+        display: flex;
+        flex-direction: column !important;
+    }
+    .bannerTitle {
+        font-size: 1.3rem !important;
+    }
+    .sectionheading{
+        font-size: 21px;
+    }
+    .cookiesMobileSection .tab-content{
+        padding: 8px 16px;
+    }
+    .courseDetailMentorCard{
+        margin-bottom: 3.5rem;
+    }
+    .course-details-text-truncate{
+        max-width: 80%;
+    }
+    .shoppingCartMobileView{
+        position: absolute;
+        top: 12px;
+        left: 10px;
+    }
+}
+
+/* Max-width 576px media  */
+@media screen and (max-width: 576px) {
+    .simplebar-content li h4 {
+        font-size: 15px;
+    }
+    .text-truncate span {
+        font-size: 13px !important;
+    }
+    .timeduration {
+        font-size: 13px;
+    }
+    .desktop-button i {
+        font-size: 1.2rem !important;
+    }
+    .accrodanTitle {
+        font-size: 15px;
+    }
+    .bannerDescription{
+        font-size: 14px !important;
+    }
+    .bannerButton{
+        font-size: 12px !important;
+    }
+    .browseAllResult{
+        font-size: 1rem;
+    }
+    .course-title a{
+        font-size: 16px;
+    }
+    .browseAllCourse ul li{
+        font-size: 13px;
+    }
+    .browseAllCourse .course-price{
+        font-size: 17px;
+    }
+
+    .browseAllCourse .buy-now{
+        font-size: 12px;
+    }
+    .course-video-player-page .navbar-vertical{
+        position: relative;
+        /* max-width: 400px; */
+        max-width: 350px;
+        height: auto;
+        /* margin-left: -25rem; */
+
+        margin-left: -22rem;
+    }
+    .course-video-player-page-studentExamSection .navbar-vertical{
+        position: relative;
+        max-width: 400px;
+        height: auto;
+        margin-left: -19rem;
+    }
+    .mainMockSection{
+        padding: 1rem;
+    }
+    .course-video-player-page-studentExamSection .simplebar-content-wrapper .simplebar-content{
+        width: 300px;
+     }
+     .custom-form-container{
+        padding: 0px !important;
+     }
+     .submittedPortfolioListTitle{
+        font-size: 1.20rem;
+     }
+     .studentAssignmentTitle{
+        font-size: 1rem;
+     }
+     .hero-section .carousel-control-prev{
+        top: 28rem;
+        left: -3.5vw;
+    }
+    .hero-section .carousel-control-next{
+        top: 28rem;
+        right: -3.5vw;
+    }
+    .couser-detail-modal-close-button{
+        position: absolute;
+        top: -35px;
+        right: -10px;
+        cursor: pointer;
+    }
+    .course-video-player-page #menu-button,
+    .course-video-player-page #menu-button2,
+    .course-video-player-page #menu-button3,
+    .course-video-player-page #menu-button4,
+    .course-video-player-page #menu-button5,
+    .course-video-player-page #menu-button6,
+    .course-video-player-page #menu-button7,
+    .course-video-player-page #menu-button8,
+    .course-video-player-page #menu-button9,
+    .course-video-player-page #menu-button10 {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    padding: 15px 15px;
+    background-color: var(--secondary);
+}
+.course-video-player-page .toggle-button{
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    padding: 15px 15px;
+    background-color: #dae138 !important;
+}
+.otp-verification{
+    width: 100%;
+   }
+    .mentor-answersheet-header{
+        font-size: 18px;
+   }
+   .mentor-studentname{
+    font-size: 14px;
+   }
+   .mobileinput{
+    width: 60%;
+   }
+   .reflectiveJournalcontainer{
+        /* margin-left: 0.5rem !important; */
+   }
+   .reflectivejournalquestions{
+    font-size: 14px !important;
+   }
+   .reflectivemarks, .reflectiveplusicon, .mcq_questiontitle, .mcq_questionmarks{
+        font-size: 14px !important;
+   }
+   .reflectivejournalsmarks{
+    word-wrap: break-word;
+    white-space: normal;
+    min-width: 500px !important;
+   }
+   .mcqmainheading{
+        font-size: 16px !important;
+   }
+   .reflectivejournalementorquestions, .assignmentementorquestion, .reflectivejournalementoranswer, .assignmentementoranswer, .mock_interview_ementor_question, .mock_interview_ementor_answer, .vlog_ementor_question, .vlog_ementor_answer, .survey_ementor_question, .survey_ementor_answer{
+    font-size: 14px !important;
+   }
+   .mcqheading{
+    font-size: 16px;;
+   }
+   .img-4by3-lg{
+    width: 2.5rem !important;
+   }
+   .mcq_question_title, .mcq_marks_title{
+    font-size: 15px;
+   }
+}
+
+@media screen and (max-width: 375px){
+    .course-video-player-page .navbar-vertical{
+        position: relative;
+        max-width: 400px;
+        height: auto;
+        margin-left: -19rem;
+    }
+    .course-video-player-page-studentExamSection .simplebar-content-wrapper .simplebar-content{
+        width: 270px;
+     }
+     .ExamSubmissionForm{
+        margin-left: 1rem;
+        padding: 1rem;
+     }
+     .mobileVerification .form-control{
+        padding: 5px 10px;
+     }
+     .mobileVerification{
+        width: 100%;
+     }
+     .education_upload_status{
+        margin-left: 38px;
+     }
+
+     .course-video-player-page-studentExamSection .navbar-vertical{
+        position: relative;
+        max-width: 400px;
+        height: auto;
+        margin-left: -18rem !important;
+     }
+    
+   
+}
+@media screen and (max-width: 425px){
+    .logo-main img{
+        width: 120px;
+    }
+    .shopping-cart-icon .btn-icon{
+        height: 2.1rem;
+        width : 2.1rem;
+    }
+    .course-selected-title{
+        font-size: 12px !important;
+    }
+    .text-truncate-line-2{
+        font-size: 15px;
+    }
+    .score-container .score{
+        font-size: 1.4rem;
+    }
+    .show-password-eye{
+        margin-right: 490px;
+        margin-top: -28px;
+        position: absolute;
+        z-index: 1;
+        left: 90%;
+    }
+    .mobile-view-text{
+        font-size: 14px;
+    }
+    .mobileinput{
+        width: 75%;
+       }
+       .mobileviewtext{
+        font-size: 14px;
+       }
+       .mobileViewButton{
+        font-size: 12px;
+       }
+       .assessmentFailHeading{
+        font-size: 20px !important;
+     }
+     .mock-interview-customInput{
+        display: inline-block;
+    }
+    .mockContentUpload{
+        width: 100%;
+        margin-top: 10px;
+    }
+    .course-category-tabs-main .card-body{
+        height: 160px !important;
+    }
+    .mobile-with-country-codewhatsapp{
+        display: flex;
+        flex-direction: column;
+    }
+        #mob_code{
+            width: 100% !important;
+            margin-bottom: 5px;
+        }
+}
+@media only screen and (max-width: 425px) and (min-width: 375px){
+    .mobileviewsection {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .mobileviewsection .card {
+        /* width: 300px; */
+    }
+    .mobileviewsection {
+        width: 260px;
+    }
+    .otp-verification .form-control{
+        padding: 4px 12px;
+       }
+       .g-recaptcha{
+        transform: scale(0.67) !important;
+        transform-origin: 0 0 !important;
+        -webkit-transform-origin:0 0 !important;
+    }
+   
+}
+
+@media screen and (max-width: 320px){
+    .course-video-player-page-studentExamSection .navbar-vertical{
+        position: relative;
+        max-width: 400px;
+        height: auto;
+        margin-left: -17rem;
+    }
+    .course-video-player-page-studentExamSection .simplebar-content-wrapper .simplebar-content{
+        width: 250px;
+     }
+     .otp-verification .form-control{
+        padding: 2px 10px;
+       }
+       .mobileinput .form-control{
+        padding: 0.5rem 12px;
+    }
+   
+}
+
+@media screen and (max-width: 359px){
+    .marksObtainedTitle{
+        font-size: 10px !important;
+    }
+    .mockTitleSection, .assignmentTitleSection, .vlogTitleSection, .portfolioTitleSection{
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 395px){
+   .upload_id_status{
+    margin-left: 38px;
+   }
+}
+
+@media screen and (max-width: 425px){
+    .student_resume > span:first-child{
+        display: block !important;
+    }
+    .resume-btn{
+        margin-left: 38px !important; 
+    }
+    .dbaMobileView{
+        display: block !important;
+        margin-left: 2rem !important;
+    }
+    .upload_id_status_research_pending{
+        margin-left: 2rem !important;
+    }
+}
+
+@media screen and (max-width: 475px){
+    .select2-dropdown{
+        width: 250px !important;
+    }
+    .g-recaptcha{
+        transform: scale(0.77);
+        transform-origin: 0 0;
+        -webkit-transform-origin:0 0;
+    }
+    .student_english_test, .student_resume, .student_education_details,.student_upload_id{
+        font-size: 14px !important;
+    }
+    .english_test_btn{
+        margin-left: 38px !important;
+    }
+    .vlogjobDesc{
+        font-size: small;
+        margin-left: 0px;
+    }
+    .upload_id_status_research_unverified{
+        margin-left: 2rem;
+    }
+    .deploymnetTextonMobile{
+        font-size: 18px !important;
+    }
+}

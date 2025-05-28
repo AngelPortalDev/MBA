@@ -1,0 +1,76 @@
+
+@media only screen and (max-width: 768px) {
+    .malta_heading_title {
+      font-size: 32px !important;
+        line-height: 40px !important;
+    }
+    .malta_sub_heading{
+        font-size: 22px !important;
+        line-height: 30px !important;
+    }
+    .malta_offer_title,.study_benifit_title {
+        font-size: 16px !important;
+    }
+    .study_benifi_list span{
+        font-size: 15px !important;
+    }
+    .about_us_title{
+        font-size: 30px !important;
+        line-height: 35px;
+    }
+ 
+    .home_page{
+        padding: 160px 0px 60px 0px !important;
+    }
+    .program_section_title{
+        font-size: 24px !important;
+        line-height: 30px !important;
+    }
+    .button_wrapper{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .course-list-heading{
+        margin-top: 3rem !important;
+    }
+
+    .our_mission_section_title{
+        font-size: 24px !important;
+    }
+    .campus_notes_title{
+        font-size: 30px !important;
+        line-height: 35px !important;
+    }
+    
+  }
+
+
+   @media only screen and (max-width: 992px) {
+    .our_program_course_title{
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+    }
+    .about_us_heading{
+        margin-top: 5rem !important;
+    }
+    .about_us_mobile{
+        display: none;
+    }
+
+  }
+
+   @media only screen and (min-width: 992px) {
+    .img_section_university{
+        padding: 0;
+    }
+    .img_section_graduate{
+        padding: 0;
+    }
+    .about_us_desktop{
+        display: none;
+    }
+  } 
+
+ 
+

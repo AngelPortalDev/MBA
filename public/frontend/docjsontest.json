@@ -1,0 +1,130 @@
+{
+    "apiRequest": {
+        "error": [],
+        "resources": [
+            "document",
+            "job"
+        ],
+        "status": "success",
+        "statusCode": 200,
+        "url": "https:\/\/api.mindee.net\/v1\/products\/joniwe9528\/eductional_cert\/v1\/documents\/dea83bf4-1c15-467b-a128-d54b4c2d6c35"
+    },
+    "job": {
+        "id": "16854474-7f15-4b86-bd11-d521600bc33f",
+        "issuedAt": {
+            "date": "2024-04-24 13:50:03.859000",
+            "timezone_type": 3,
+            "timezone": "UTC"
+        },
+        "availableAt": {
+            "date": "2024-04-24 13:50:10.333000",
+            "timezone_type": 3,
+            "timezone": "UTC"
+        },
+        "status": "completed",
+        "millisecsTaken": -6474
+    },
+    "document": {
+        "filename": "phpDB94.tmp",
+        "inference": {
+            "product": {
+                "name": "joniwe9528\/eductional_cert",
+                "version": "1.0"
+            },
+            "prediction": {
+                "fields": {
+                    "certificate_id": {
+                        "value": "00117390",
+                        "reconstructed": false,
+                        "pageId": null,
+                        "confidence": 0,
+                        "rawValue": null,
+                        "polygon": {},
+                        "boundingBox": null
+                    },
+                    "certificate_name": {
+                        "value": "Post-Diploma Bachelor of Business Administration (Accounting Studies)",
+                        "reconstructed": false,
+                        "pageId": null,
+                        "confidence": 0,
+                        "rawValue": null,
+                        "polygon": {},
+                        "boundingBox": null
+                    },
+                    "completion_date": {
+                        "pageId": null,
+                        "values": [
+                            {
+                                "value": "2017-07-28",
+                                "reconstructed": false,
+                                "pageId": null,
+                                "confidence": 0,
+                                "rawValue": null,
+                                "polygon": {},
+                                "boundingBox": null
+                            }
+                        ]
+                    },
+                    "degree_name": {
+                        "value": "Bachelor of Business Administration",
+                        "reconstructed": false,
+                        "pageId": null,
+                        "confidence": 0,
+                        "rawValue": null,
+                        "polygon": {},
+                        "boundingBox": null
+                    },
+                    "grade": {
+                        "value": "2.95",
+                        "reconstructed": false,
+                        "pageId": null,
+                        "confidence": 0,
+                        "rawValue": null,
+                        "polygon": {},
+                        "boundingBox": null
+                    },
+                    "institute_name": {
+                        "pageId": null,
+                        "values": [
+                            {
+                                "value": "University of Education, Winneba, Ghana",
+                                "reconstructed": false,
+                                "pageId": null,
+                                "confidence": 0,
+                                "rawValue": null,
+                                "polygon": {},
+                                "boundingBox": null
+                            }
+                        ]
+                    },
+                    "pass_fail_remark": {
+                        "value": "Second Class Honours (Lower Division)",
+                        "reconstructed": false,
+                        "pageId": null,
+                        "confidence": 0,
+                        "rawValue": null,
+                        "polygon": {},
+                        "boundingBox": null
+                    },
+                    "signature": {
+                        "pageId": null,
+                        "signature": "Seal OF E in Accounting Vice-Chancellor Registrar"
+                    },
+                    "student_name": {
+                        "value": "Innocent Yawli",
+                        "reconstructed": false,
+                        "pageId": null,
+                        "confidence": 0,
+                        "rawValue": null,
+                        "polygon": {},
+                        "boundingBox": null
+                    }
+                }
+            },
+            "pages": [],
+            "isRotationApplied": null
+        },
+        "id": "dea83bf4-1c15-467b-a128-d54b4c2d6c35",
+        "nPages": 2
+    }
+}

@@ -1,0 +1,82 @@
+const Web3 = require("web3");
+const fs = require("fs");
+
+const privateKey =
+    "27ae78f1dee2c1b337f5abebbc36692991e4aebbaedf1b85ac2c83a2bda4e6dd";
+const infuraUrl =
+    "https://holesky.infura.io/v3/65d869646c2d4517a9691b56caa97896";
+
+// Set up Web3
+const web3 = new Web3(new Web3.providers.HttpProvider(infuraUrl));
+
+// Load compiled contract
+const abi = JSON.parse(fs.readFileSync("eascencia_abi.json", "utf8")); // Replace with the path to your ABI file
+//const bytecode = fs.readFileSync("EASCENCIA_bytecode.txt", "utf8"); // Replace with the path to your bytecode file
+
+// Deploy the contract
+// async function deployContract() {
+//   const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+//   web3.eth.accounts.wallet.add(account);
+//   web3.eth.defaultAccount = account.address;
+
+//   const contract = new web3.eth.Contract(abi);
+
+//   console.log("Deploying contract...");
+//   const deployTx = contract.deploy({
+//     data: bytecode,
+//     arguments: ["First App"], // Constructor arguments
+//   });
+
+//   const gas = await deployTx.estimateGas({ from: account.address });
+//   const deployedContract = await deployTx.send({
+//     from: account.address,
+//     gas,
+//   });
+
+//   console.log(`Contract deployed at address: ${deployedContract.options.address}`);
+//   return deployedContract;
+// }
+
+// Mint an NFT
+async function mintNFT(contractAddress, toAddress, metadataURI) {
+    const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+    web3.eth.accounts.wallet.add(account);
+    web3.eth.defaultAccount = account.address;
+
+    const contract = new web3.eth.Contract(abi, contractAddress);
+
+    console.log("Minting NFT...");
+    const gas = await contract.methods
+        .safeMint(toAddress, metadataURI)
+        .estimateGas({
+            from: account.address,
+        });
+    console.log("Sending...");
+    const tx = await contract.methods.safeMint(toAddress, metadataURI).send({
+        from: account.address,
+        gas,
+    });
+
+    console.log(
+        `NFT minted successfully with metadata URI: ${tx.transactionHash}`
+    );
+}
+
+// Main function to deploy and mint
+document.getElementById("dep").addEventListener("click", () => {
+    console.log("Deploy..");
+    (async () => {
+        try {
+            const contractAddress =
+                "0x0c8765d40bf555ccddacc993fe68ce0410e4f4a9";
+            const recipientAddress =
+                "0x8d80E7620Ff8d7d955daB5F7A97795725ffe40E4"; // Replace with recipient's Ethereum address
+            const ipfsURI =
+                "https://purple-genetic-ptarmigan-359.mypinata.cloud/ipfs/bafybeie64je54p5e6vcovllmtqrbrdgoufopd2qrqesk5wpth6grs3alsa-Test"; // Replace with your IPFS CID
+
+            await mintNFT(contractAddress, recipientAddress, ipfsURI);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    })();
+});

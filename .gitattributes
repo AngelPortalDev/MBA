@@ -1,0 +1,15 @@
+* text=auto
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+last_live.zip filter=lfs diff=lfs merge=lfs -text
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 8b4727cbf0dd6faaa0c6e2b345147e1b3dcfd7bd
