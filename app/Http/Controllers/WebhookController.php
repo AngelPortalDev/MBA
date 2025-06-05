@@ -89,8 +89,8 @@ class WebhookController extends Controller
         $end = Carbon::parse("{$request->date} {$request->endtime}",'Europe/Malta');
         $course= base64_decode($request->course_id);
 
-        $useremail = CourseModule::where('id',$course)->with('Ementor')->get();
-        dd($useremail[0]['Ementor']['email']);
+        // $useremail = CourseModule::where('id',$course)->with('Ementor')->get();
+        // dd($useremail[0]['Ementor']['email']);
         $eventData = [
             'summary' => $request->name,
             'description' => 'Meeting scheduled via web form',
