@@ -18,7 +18,7 @@ class GoogleCalendarService
         $this->client->setAuthConfig(storage_path('app/google-calendar/credentials.json'));
         $this->client->addScope(Google_Service_Calendar::CALENDAR);
         $this->client->setAccessType('offline');
-        $this->client->setRedirectUri('https://20e3-110-226-176-73.ngrok-free.app/google/callback');
+        $this->client->setRedirectUri('https://www.estudy.mt/google/callback');
 
         // if (session()->has('google_token')) {
         //     $this->client->setAccessToken(session('google_token'));
