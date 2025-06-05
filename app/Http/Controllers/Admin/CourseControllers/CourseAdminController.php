@@ -238,8 +238,7 @@ class CourseAdminController extends Controller
                 if($course_id == ''){
                     $select = array_merge($select, ['created_at' => $this->time]);
                 }
-                // print_r($req->all());
-                // die;
+
                 if (isset($req->module_name) && !empty($module_name)) {
                     $select = array_merge($select, ['bn_module_name' => $module_name]);
                 }
@@ -302,8 +301,7 @@ class CourseAdminController extends Controller
                 } else {
                     $updateUserProfile = processData(['course_master', 'id'], $select, $courseWhere);
                 }
-                // print_r($updateUserProfile);
-                // die;
+
                 if (isset($updateUserProfile) && is_array($updateUserProfile) && $updateUserProfile['status'] === TRUE) {
 
                     $where = ['course_id' => $course_id];
