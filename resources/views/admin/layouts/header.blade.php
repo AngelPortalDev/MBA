@@ -266,7 +266,7 @@
                     </ul>
                 @else
                 <!-- Brand logo -->
-                <a class="navbar-brand" href="{{ route('dashboard.admin') }}">
+                <a class="navbar-brand" href="{{ route('admin.index') }}">
                     <img src="{{ asset('admin/images/brand/logo/logo.png') }}" alt="E-Study" />
                 </a>
                 <!-- Navbar nav -->
@@ -288,11 +288,7 @@
                             </ul>
                         </div> --}}
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link  {{ request()->is('admin/dashboard') ? 'active' : '' }}  collapsed " href="{{ route('dashboard.admin') }}">
-                            <i class="nav-icon fe fe-home me-2"></i> Dashboard 
-                        </a>
-                    </li>
+                
                     @if(Auth::check() && Auth::user()->role === 'superadmin')
                     <li class="nav-item">                
                         <a class="nav-link  collapsed " href="{{ route('admin.index') }}">
