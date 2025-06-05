@@ -204,8 +204,8 @@
                                                     {{-- <th>Enrolled</th> --}}
                                                     <th>Course Name</th>
                                                     {{-- <th>Total Payment</th> --}}
-                                                    <th>Exam</th>
-                                                    <th>Course Status</th>
+                                                    {{-- <th>Exam</th>
+                                                    <th>Course Status</th> --}}
                                                     <th>Joined</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -492,10 +492,51 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="SelectCourseModal" tabindex="-1" aria-labelledby="selectCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="CourseForm">
+          @csrf
+          <div class="modal-header">
+            <h5 class="modal-title">Select Course</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" class="student_id" name="student_id">
+            
+            @php $CourseData = getData('course_master',['id','course_title'],['is_deleted'=>'No']);@endphp
+
+            <div class="mb-3">
+              <label for="course_id" class="form-label">Course</label>
+              <select class="form-select course_id" id="course_id" name="course_id" required>
+                <option value="">-- Select --</option>
+                @foreach ($CourseData as $course)
+                <option value="{{base64_encode($course->id)}}">{{$course->course_title}}</option>
+                @endforeach
+              </select>
+            
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" id="CoursePurchaseSubmit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <script src="{{ asset('admin/js/export.js')}}"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <script>
+
+    $(document).on('click', '.CoursePurchase', function () {
+        const student_id = $(this).data('student_id');
+
+        // Set values in modal
+        $('.student_id').val(student_id);
+        // Manually open modal
+        $('#SelectCourseModal').modal('show');
+    });
 $(document).ready(function () {
     studentList("all");
     handleSearchInput('searchInput',function(){
@@ -876,60 +917,60 @@ $('#checkAll').click(function (e) {
                 },
                 width:'30%',
             },
-            {
-                "data": null,
-                render: function (row) {
-                    var examStatus = [];
-                    let badge = '';
-                    if (row.paidCourses && row.paidCourses.length > 0) {
-                        row.paidCourses.forEach(function(course) {
-                            let examData = row.examResults && row.examResults[course.scmId] ? row.examResults[course.scmId] : null;
+            // {
+            //     "data": null,
+            //     render: function (row) {
+            //         var examStatus = [];
+            //         let badge = '';
+            //         if (row.paidCourses && row.paidCourses.length > 0) {
+            //             row.paidCourses.forEach(function(course) {
+            //                 let examData = row.examResults && row.examResults[course.scmId] ? row.examResults[course.scmId] : null;
                             
-                            if (examData) {
-                                badge = `<div class="exam-status" style="line-height:1.5rem">` + 
-                                        `<span class="mb-3 badge bg-${examData.color}">${examData.result} ${examData.percent ? examData.percent + '%' : ''}</span>` + 
-                                        `</div>`;
-                            } else {
-                                badge = `<div class="exam-status" style="line-height:1.5rem">` + 
-                                        `<span class="badge bg-primary mb-3">Not Attempt</span>` + 
-                                        `</div>`;
-                            }
-                            examStatus += `${badge}`;
+            //                 if (examData) {
+            //                     badge = `<div class="exam-status" style="line-height:1.5rem">` + 
+            //                             `<span class="mb-3 badge bg-${examData.color}">${examData.result} ${examData.percent ? examData.percent + '%' : ''}</span>` + 
+            //                             `</div>`;
+            //                 } else {
+            //                     badge = `<div class="exam-status" style="line-height:1.5rem">` + 
+            //                             `<span class="badge bg-primary mb-3">Not Attempt</span>` + 
+            //                             `</div>`;
+            //                 }
+            //                 examStatus += `${badge}`;
 
-                        });
-                    }
-                    return examStatus;
+            //             });
+            //         }
+            //         return examStatus;
 
-                },
-                width:'30%',
-            },
-            {
-                "data": null,
-                render: function (row) {
-                    var examStatus = [];
-                    let badge = '';
-                    if (row.paidCourses && row.paidCourses.length > 0) {
-                        row.paidCourses.forEach(function(course) {
-                            let examData = row.statusInfo && row.statusInfo[course.scmId] ? row.statusInfo[course.scmId] : null;
+            //     },
+            //     width:'30%',
+            // },
+            // {
+            //     "data": null,
+            //     render: function (row) {
+            //         var examStatus = [];
+            //         let badge = '';
+            //         if (row.paidCourses && row.paidCourses.length > 0) {
+            //             row.paidCourses.forEach(function(course) {
+            //                 let examData = row.statusInfo && row.statusInfo[course.scmId] ? row.statusInfo[course.scmId] : null;
                             
-                            if (examData) {
-                                badge = `<div class="exam-status" style="line-height:1.5rem">` + 
-                                        `<span class="mb-3 badge bg-${examData.color}">${examData.status}</span>` + 
-                                        `</div>`;
-                            } else {
-                                badge = `<div class="exam-status" style="line-height:1.5rem">` + 
-                                        `<span class="badge bg-primary mb-3">Not Attempt</span>` + 
-                                        `</div>`;
-                            }
-                            examStatus += `${badge}`;
+            //                 if (examData) {
+            //                     badge = `<div class="exam-status" style="line-height:1.5rem">` + 
+            //                             `<span class="mb-3 badge bg-${examData.color}">${examData.status}</span>` + 
+            //                             `</div>`;
+            //                 } else {
+            //                     badge = `<div class="exam-status" style="line-height:1.5rem">` + 
+            //                             `<span class="badge bg-primary mb-3">Not Attempt</span>` + 
+            //                             `</div>`;
+            //                 }
+            //                 examStatus += `${badge}`;
 
-                        });
-                    }
-                    return examStatus;
+            //             });
+            //         }
+            //         return examStatus;
 
-                },
-                width:'30%',
-            },
+            //     },
+            //     width:'30%',
+            // },
             {
                 "data": null,
                 render: function (row) {
@@ -958,7 +999,11 @@ $('#checkAll').click(function (e) {
                         // <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Delete" ><i class="fe fe-trash"></i></a>
                         var Action = '<div class="hstack gap-3"><a href="' +
                         editUrl +
-                        '" data-bs-toggle="tooltip" data-placement="top" title="Edit"><i class="fe fe-edit"></i></a><a href="#" data-bs-toggle="tooltip" data-placement="top" title="Delete" class="deleteStudent" data-delete_id="'+btoa(row.id)+'"><i class="fe fe-trash"></i></a><span class="dropdown dropstart"><a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false"><i class="fe fe-more-vertical"></i></a> <span class="dropdown-menu"><span class="dropdown-header">Settings</span>';
+                        '" data-bs-toggle="tooltip" data-placement="top" title="Edit"><i class="fe fe-edit"></i></a><a href="#" data-bs-toggle="tooltip" data-placement="top" title="Delete" class="deleteStudent" data-delete_id="'+btoa(row.id)+'"><i class="fe fe-trash"></i></a>';
+                        if (row.paidCourses && row.paidCourses.length ==  0) {
+                             Action += '<button class="btn btn-sm btn-primary CoursePurchase" data-student_id="'+btoa(row.id)+'">Assigned Course</button>';
+                        }
+                         Action += '<span class="dropdown dropstart"><a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false"><i class="fe fe-more-vertical"></i></a> <span class="dropdown-menu"><span class="dropdown-header">Settings</span>';              
                         // <a class="dropdown-item"  href="#"><span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Active</a><a class="dropdown-item" href="#"><span class="badge-dot bg-danger me-1 d-inline-block align-middle"></span>Inactive</a><a class="dropdown-item" href="#"><i class="fe fe-mail dropdown-item-icon"></i>Mail</a><a class="dropdown-item" href="#"><i class="fe fe-move dropdown-item-icon"></i>Move</a></span>'
 
                         // var Action = '<div class="hstack gap-3"><a id="editpromocode" data-id="'+btoa(row.id)+'" href="#"><i class="fe fe-edit"></i></a><a href="#" data-bs-toggle="tooltip" data-placement="top" title="Delete" class="deletePromoCode" data-status="'+btoa('delete')+'" data-delete_id="'+btoa(row.id)+'"><i class="fe fe-trash"></i></a><span class="dropdown dropstart"><a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false"><i class="fe fe-more-vertical"></i> </a><span class="dropdown-menu"><span class="dropdown-header">Settings</span>';
@@ -970,7 +1015,7 @@ $('#checkAll').click(function (e) {
                                 Action += '<a class="dropdown-item statusStudent" href="#" data-status="'+btoa('student_status_inactive')+'" data-role="students" data-student_id="'+btoa(row.id)+'"><span class="badge-dot bg-danger me-1 d-inline-block align-middle"></span>Inactive </a> </div>';
                             }
                         }
-                        Action +'</span></span></div>';
+                        Action +'</span></span></div>';                       
                         return Action;
                     // );
                 },
