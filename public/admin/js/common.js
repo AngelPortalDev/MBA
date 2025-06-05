@@ -142,9 +142,9 @@ $(document).ready(function () {
                             icon: response.icon,
                         };
                         source = 'admin';
-    
+
                         var redirect = `/admin/${source}`;
-    
+
                         showModalWithRedirect(modalData, redirect);
                     }
                     if (response.code === 202) {
@@ -323,14 +323,14 @@ $("#deleteAdmin").on("click", function (e) {
                             icon: response.icon,
                         }
                         showModal(modalData);
-                        
+
                         if (atob($('.action').val()) === "section") {
                             sectionList().reload().fadeIn();
                         }
                         if (atob(section_type) === "article") {
                             list("all").reload().fadeIn();
                         }
-                        
+
                     },
                 });
         });
@@ -357,7 +357,7 @@ $("#deleteAdmin").on("click", function (e) {
             // }).then((willDelete) => {
             //     if (willDelete) {
             //         $(".save_loader").removeClass("d-none").addClass("d-block");
-            
+
             const modalData = {
                 title: "Delete Admin",
                 message: "Are you sure you want to delete admin?.",
@@ -390,16 +390,16 @@ $("#deleteAdmin").on("click", function (e) {
                             //     return (window.location.href =
                             //         "/admin/admin");
                             // });
-    
+
                             $("#processingLoader").fadeOut();
                             const modalData = {
                                 title: response.title,
                                 message: response.message || "",
                                 icon: response.icon,
                             };
-        
+
                             var redirect = `/admin/admin`;
-        
+
                             showModalWithRedirect(modalData, redirect);
 
                             // if (response.code === 200) {
@@ -433,7 +433,7 @@ $("#deleteAdmin").on("click", function (e) {
                 $("#customModal").hide();
             });
         }
-    
+
     });
 
     $(".profileAdminPic").on("change", function () {
@@ -442,10 +442,10 @@ $("#deleteAdmin").on("click", function (e) {
         var file = fileInput.files[0];
         var currnetForm = $(this).closest("form");
         var currnetimg = $(this).closest("img");
-        var form = $(".proflilImage").serialize();     
-        // form.append('image_file', file);   
+        var form = $(".proflilImage").serialize();
+        // form.append('image_file', file);
          var formData = new FormData($(".proflilImage")[0]);
-         formData.append('image_file', file);   
+         formData.append('image_file', file);
         $.ajax({
             url: baseUrl + "/admin/add-admin-profile-image",
             type: "post",
@@ -482,7 +482,7 @@ $("#deleteAdmin").on("click", function (e) {
                     //     text: response.text,
                     //     icon: "error",
                     // });
-                    
+
                     const modalData = {
                         title: response.title,
                         message: response.message,
@@ -667,7 +667,7 @@ $("#deleteAdmin").on("click", function (e) {
                                         }
                                     })
                                     search_list.append("</span></a></div></div></div>");
-                                
+
                             counter++;
                         });
                         search_list.show();
@@ -682,6 +682,92 @@ $("#deleteAdmin").on("click", function (e) {
             $(".list-group li").show();
         }
     });
+
+
+ $(".createSchedule").on("click", function(event) {
+    event.preventDefault();
+
+    // Hide all error messages
+    $("#first_name_error, #last_name_error, #email_error").hide();
+
+    // Get values
+    var name = $("#name").val();
+    var date = $("#date").val();
+    var time = $("#time").val();
+    var courseID = $("#ScheduleMeeting").data("course-id");
+    console.log("Course ID: ", courseID);
+    // Validation
+    if (name === "") {
+        $("#first_name_error").show().text("Please enter a description.");
+        return;
+    }
+    if (date === "") {
+        $("#last_name_error").show().text("Please select a date.");
+        return;
+    }
+    if (time === "") {
+        $("#email_error").show().text("Please select a time.");
+        return;
+    }
+
+    // Prepare data
+    var form = $(".ScheduleData").serialize()+ "&course_id=" + courseID;
+
+    // Show loader
+    $("#loader").fadeIn();
+
+    // Check form validity (optional, but you had it before)
+
+        $.ajax({
+            url: baseUrl + "/schedule-meeting",
+            type: "post",
+            data: form,
+            dataType: "json",
+
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            success: function(response) {
+                $("#loader").fadeOut();
+                if (response.code === 200 || response.code === 201) {
+                    $(".errors").remove();
+                    $("#schedule-create-modal").modal("hide"); // Make sure this matches your modal ID
+                    const modalData = {
+                        title: response.title,
+                        message: response.message,
+                        icon: response.icon,
+                    };
+                    showModal(modalData);
+                    // Optionally refresh a list or do something else
+                    // e.g., AllSchedulesList("all");
+                }
+                if (response.code === 202) {
+                    $(".errors").remove();
+                    var data = Object.keys(response.data);
+                    data.forEach(function(key) {
+                        var value = response.data[key];
+                        $("form")
+                            .find("[name='" + key + "']")
+                            .after(
+                                "<div class='invalid-feedback errors d-block'><i>" +
+                                    value +
+                                    "</i></div>"
+                            );
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                $("#loader").fadeOut();
+                // Handle error if needed
+                console.error("Error:", error);
+            }
+        });
+
+});
+
+
+
+
 });
 function appendSection(section_id, section_name, counter) {
     var parent = $("#courseOne");

@@ -272,8 +272,8 @@ Route::post('upload-subementor-document', [SubEmentorController::class, 'uploadD
 // Route::view('admin/all-masters', 'admin/course/all-masters')->name('admin.course.all-masters');
 Route::view('admin/add-course', 'admin/course/add-course')->name('admin.course.add-course');
 Route::view('admin/all-course', 'admin/course/all-course')->name('admin.course.all-course');
-// Route::view('certificates', 'admin/certificates/certificates')->name('admin.certificates.certificates'); 
-Route::view('certificate-templates', 'admin/certificates/certificate-templates')->name('admin.certificates.certificate-templates'); 
+// Route::view('certificates', 'admin/certificates/certificates')->name('admin.certificates.certificates');
+Route::view('certificate-templates', 'admin/certificates/certificate-templates')->name('admin.certificates.certificate-templates');
 Route::post('add-contact-form', [CommonController::class, 'contactForm']);
 Route::post('course/addtocart', [CartController::class, 'addtocart'])->middleware('student.checkout');
 Route::post('add-profile-image', [UserController::class, 'profilImageUpload']);
@@ -384,7 +384,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'roles:user', 'ver
     Route::controller(ArtificialIntelligence::class)->group(function () {
         Route::post('/artificial-intelligence-submit',  'ArtificialIntelligenceSubmit');
     });
-    
+
     Route::controller(Survey::class)->group(function () {
         Route::post('/survey-submit',  'surveySubmit');
     });
@@ -438,8 +438,8 @@ Route::group(['prefix' => 'ementor', 'middleware' => ['auth', 'roles:instructor'
         // Route::view('e-mentor-profile', 'frontend/teacher/e-mentor-profile')->name('e-mentor-profile');
         // Route::view('e-mentor-about-me', 'frontend/teacher/e-mentor-about-me')->name('e-mentor-about-me');
         // Route::view('e-mentor-security', 'frontend/teacher/e-mentor-security')->name('e-mentor-security');
-        Route::view('sub-ementors-list', 'frontend/teacher/sub-ementors-list')->name('sub-ementors-list');  
-        Route::get('sub-ementors-exam-list-details/{sub_ementor_id}', 'subEmentorsExams')->name('sub-ementors-exams');  
+        Route::view('sub-ementors-list', 'frontend/teacher/sub-ementors-list')->name('sub-ementors-list');
+        Route::get('sub-ementors-exam-list-details/{sub_ementor_id}', 'subEmentorsExams')->name('sub-ementors-exams');
         Route::get('get-subementor-list', 'getSubementorList');
         Route::get('subementor-checked-exams/{sub_ementor_id}', 'getCheckedExamsPendingForApproval')->name('subementor.checkedExams');
         Route::post('approve-exam', 'approveExam')->name('ementor.approveExam');
@@ -448,7 +448,7 @@ Route::group(['prefix' => 'ementor', 'middleware' => ['auth', 'roles:instructor'
 
 
 
-        
+
         Route::get('get-notification', 'getNotification');
         Route::post('mark-notification-read', 'markAsRead');
         Route::post('/check-certificate-exists', 'checkCertificate')->name('ementor.check.certificate.exists');
@@ -526,9 +526,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
     Route::view('vlog', 'admin/exam/vlog')->name('admin.exam.vlog');
     Route::view('add-vlog', 'admin/exam/add-vlog')->name('admin.exam.add-vlog');
     Route::view('edit-vlog', 'admin/exam/edit-vlog')->name('admin.exam.edit-vlog');
-    Route::view('peer-review', 'admin/exam/peer-review')->name('admin.exam.peer-review');   
-    Route::view('edit-peer-review', 'admin/exam/edit-peer-review')->name('admin.exam.edit-peer-review'); 
-    Route::view('edit-peer-review', 'admin/exam/edit-peer-review')->name('admin.exam.edit-peer-review');  
+    Route::view('peer-review', 'admin/exam/peer-review')->name('admin.exam.peer-review');
+    Route::view('edit-peer-review', 'admin/exam/edit-peer-review')->name('admin.exam.edit-peer-review');
+    Route::view('edit-peer-review', 'admin/exam/edit-peer-review')->name('admin.exam.edit-peer-review');
     Route::view('forum-leadership', 'admin/exam/forum-leadership')->name('admin.exam.forum-leadership');
     Route::view('reflective-journals', 'admin/exam/reflective-journals')->name('admin.exam.reflective-journals');
     Route::view('edit-reflective-journals', 'admin/exam/edit-reflective-journals')->name('admin.exam.edit-reflective-journals');
@@ -541,7 +541,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
 
     Route::view('final-thesis', 'admin/exam/final-thesis')->name('admin.exam.final-thesis');
     Route::view('edit-final-thesis', 'admin/exam/edit-final-thesis')->name('admin.exam.edit-final-thesis');
-    
+
     Route::view('artificial-intelligence', 'admin/exam/artificial-intelligence')->name('admin.exam.artificial-intelligence');
 
     Route::view('orientation', 'admin/course/orientation')->name('admin.course.orientation');
@@ -567,9 +567,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
     Route::view('add-journal-articles', 'admin/course/add-journal-articles')->name('admin.course.add-journal-articles');
     Route::view('edit-journal-articles', 'admin/course/edit-journal-articles')->name('admin.course.edit-journal-articles');
     Route::view('learning', 'admin/student/learning');
-    
+
     Route::get('/get-institute-students/{limit}', [InstituteController::class, 'InstituteStudentList']);
-    
+
     Route::post('/generate-cert', [Certificate::class, 'generateCert']);
 
     // Assignment
@@ -583,7 +583,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/delete-assignment-question', 'deleteAssingnQuestion');
         Route::post('/delete-assignment', 'deleteAssingnment');
     });
-    
+
     // Mock
     Route::controller(AdminMock::class)->group(function () {
         Route::post('add-mock-interview', 'addMockInterview');
@@ -618,7 +618,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::get('peer-review-data-edit/{cat?}/{id?}', 'editPeerReviewData');
         Route::post('/delete-peer-review', 'deletePeerReview');
     });
-    
+
     // forum leadership
     Route::controller(AdminDiscord::class)->group(function () {
         Route::post('add-discord', 'addDiscord');
@@ -627,7 +627,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::get('discord-data-edit/{cat?}/{id?}', 'editDiscordData');
         Route::post('/delete-discord', 'deleteDiscord');
     });
-    
+
     // reflective Journal
     Route::controller(AdminReflectiveJournal::class)->group(function () {
         Route::post('add-reflective-journal', 'addReflectiveJournal');
@@ -652,9 +652,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/edit-mcq-question', 'EditMcqQuestion');
         Route::post('/delete-mcq', 'deleteMcq');
         Route::post('/delete-mcq-question', 'deleteMcqQuestion');
-        
+
     });
-    
+
     // survey
     Route::controller(AdminSurvey::class)->group(function () {
         Route::get('survey-data/{cat?}',  'getSurveyData');
@@ -666,16 +666,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/delete-survey-pdf-file', 'deletePdfFile');
         Route::post('/delete-survey', 'deleteSurvey');
         Route::post('/delete-survey-question', 'deleteSurveyQuestion');
-        
+
     });
-    
+
     // final thesis
     Route::controller(AdminFinalThesis::class)->group(function () {
         Route::get('final-thesis-data/{cat?}',  'getFinalThesis');
         Route::post('/add-final-thesis', 'addFinalThesis');
         Route::get('final-thesis-data-edit/{cat?}/{id?}', 'getFinalThesis');
     });
-    
+
     Route::controller(AdminArtificialIntelligence::class)->group(function () {
         Route::post('add-artificial-intelligence', 'addArtificialIntelligence');
         Route::post('update-artificial-intelligence', 'updateArtificialIntelligence');
@@ -688,11 +688,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/delete-artificial-intelligence', 'deleteArtificialIntelligence');
 
     });
-    
+
     Route::get('/get-input-field-configurations', [AdminCommon::class, 'getInputFieldConfiguration']);
     Route::post('/add-input-field-configuration', [AdminCommon::class, 'addInputFieldConfiguration']);
     Route::post('/delete-input-field-configuration', [AdminCommon::class, 'deleteInputFieldConfiguration']);
-    
+
 
 
     Route::controller(AdminPayment::class)->group(function () {
@@ -775,7 +775,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/section-search', 'searchSection');
         Route::post('/section-already-added', 'sectionAlreadyAdded');
 
-        
+
         Route::get('section-orientation-get-data/', 'sectionList')->name('admin.sectionList');
         Route::get('/section-content-get/{cat?}/{edit?}', 'sectionListNew');
         Route::post('/status-course', 'statusCourse');
@@ -785,11 +785,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::get('admin-course-panel/{course_id}', 'getCoursePanelData')->name('admin-course-panel');
         Route::get('admin-master-course-panel/{course_id}', 'getMasterCoursePanelData')->name('admin-master-course-panel');
 
-        
+
         Route::post('/course-search', 'searchCourseList');
         Route::post('/course-already-added', 'CourseAlreadyAdded');
 
-        
+
 
     });
     Route::controller(SectionVideo::class)->group(function () {
@@ -827,7 +827,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::get('get-all-students-list/{ementor_id}', 'ementorAllStudentList');
 
     });
-    
+
     Route::controller(SubEmentorAdminController::class)->group(function () {
         Route::get('/get-sub-ementor-data/{cat}', 'getSubEmentorData')->name('admin.sub-ementorList');
         Route::get('/sub-e-mentors-edit/{id}', 'getSubEmentorData');
@@ -854,7 +854,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/unblock-ipadd', 'unblockIPadd');
 
         Route::view('payment-method', 'admin/settings/payment-method')->name('admin.settings.payment-method');
-       
+
         Route::view('onboarding', 'admin/settings/onboarding')->name('admin.settings.onboarding');
         Route::post('/save-boarding-permisssion', 'BoardingPermission');
         Route::view('tickets', 'admin/settings/tickets')->name('admin.settings.tickets');
@@ -877,7 +877,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::post('/add-institute-profile-image', 'instituteProfileUpload');
 
     });
-    
+
     Route::controller(AdminSalesExecutive::class)->group(function () {
         Route::post('/sales-executive-create', 'createSalesExecutive');
         Route::get('/get-sales-executive-list/{cat}', 'getSalesExecutiveData');
@@ -926,3 +926,29 @@ require __DIR__ . '/auth.php';
 
 
 Route::view('instructions', 'frontend/instructions')->name('instructions');
+
+
+
+#Google-meet link
+
+Route::get('/google/auth', [WebhookController::class, 'redirectToGoogle'])->name('google.auth');
+Route::get('/google/callback', [WebhookController::class, 'handleGoogleCallback'])->name('google.callback');
+Route::post('/schedule-meeting', [WebhookController::class, 'scheduleMeeting'])->name('schedule.meeting');
+Route::get('/debug-token', function () {
+    $token = session('google_token');
+
+    if ($token && isset($token['access_token'])) {
+        DB::table('google_tokens')->updateOrInsert(
+            ['id' => 1],
+            [
+                'token' => json_encode($token),
+                'updated_at' => now(),
+                'is_deleted' => 'No'
+            ]
+        );
+
+        return 'Token saved to database.';
+    }
+
+    return 'No valid token found in session.';
+});

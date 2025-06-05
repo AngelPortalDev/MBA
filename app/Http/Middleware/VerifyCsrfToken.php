@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/stripe_webhook',
-        '/process_callback/*'
+        '/process_callback/*',
+        'http://20e3-110-226-176-73.ngrok-free.app',
     ];
 }
