@@ -50,7 +50,7 @@ class CommonController extends Controller
                     'message.max'=>'Message should be less than 1000 characters.'
                 ]
                 );
-              
+
                 // Validation passed, continue processing the data...
             } catch (ValidationException $e) {
 
@@ -70,13 +70,13 @@ class CommonController extends Controller
                 ];
 
             $updateContact = processData(['contact_form', 'id'], $data, $where);
-                
+
             $unsubscribeRoute = url('/unsubscribe/'.base64_encode($email));
-            
+
             mail_send(2, ['#First Name#', '#Last Name#', '#Email#', '#Mobile Number with Country Code#', '#Category#', '#Message#'], [$first_name, $last_name, $email, $mob_code. " ".$phone, $contact_role, $messages ], env('RECIPIENT_EMAIL'), '', $email);
-            
+
             mail_send(49, ['#Visitor Name#', '#unsubscribeRoute#'], [$first_name." ".$last_name, $unsubscribeRoute], $email);
-            
+
             return json_encode(['code' => 200, 'title' => 'Successfully Submitted', "message" => "Contact form submitted successfully", "icon" => generateIconPath("success")]);
         }else{
             return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please Try Again', "icon" => generateIconPath("error")]);
@@ -90,11 +90,11 @@ class CommonController extends Controller
                 if (session()->has('exam_type')) {
                     session()->forget('exam_type');
                 }
-                
+
                 if (session()->has('lastAnswerSubmit')) {
                     session()->forget('lastAnswerSubmit');
                 }
-                
+
                 if (session()->has('reflectiveJournalExamCourseId')) {
                     session()->forget('reflectiveJournalExamCourseId');
                 }
@@ -126,7 +126,7 @@ class CommonController extends Controller
                                 'student_course_master_id' => $student_course_master_id
                             ];
                             $where = array_merge($where, $additionalConditions);
-                            
+
                             $data = $this->examManage->getAwardCourse($where);
                             $awardCourses = $data['awardCourseIds'];
                             $optionalCourseSelected = $data['optionalCourseSelected'];
@@ -140,7 +140,7 @@ class CommonController extends Controller
                                     'course_id' => $awardCourse->course_id,
                                     'is_deleted' => 'No'
                                 ];
-                                
+
                                 $awardCourses[$key]->course_exam = $this->examManage->getCouresExam($courseWhere);
                             }
 
@@ -209,10 +209,10 @@ class CommonController extends Controller
                                     'title' => $title,
                                     'answer_count' => $i,
                                     'has_accepted_exam_instructions' => $has_accepted_exam_instructions,
-                                    'created_at' =>  $this->time, 
+                                    'created_at' =>  $this->time,
                                 ];
                                 $updateCourse = processData(['exam_eportfolio', 'id'], $select);
-                                
+
                                 foreach ($answers as $key => $answer) {
                                     $questions_id =  1 + $key;
                                     $answers_decode =  htmlspecialchars($answer);
@@ -227,7 +227,7 @@ class CommonController extends Controller
 
                                 if ((isset($updateCourse) && is_array($updateCourse) && $updateCourse['status'] === TRUE) && (isset($updatePortfolioAnswer) && is_array($updatePortfolioAnswer) && $updatePortfolioAnswer['status'] === TRUE)) {
                                     DB::commit();
-                                    
+
                                     $course_id = DB::table('student_course_master')->where('id', $student_course_master_id)->value('course_id');
                                     $courseMaster = getData('course_master', ['category_id', 'course_title'], ['id' => $course_id]);
 
@@ -250,14 +250,14 @@ class CommonController extends Controller
                                     }
 
                                     // $examManagementMaster = getCourseExamCount(base64_encode($course_id));
-                                    
+
                                     $examRemarkMasters = ExamRemarkMaster::where([
                                         'student_course_master_id' => $student_course_master_id,
                                         // 'course_id' => $course_id,
                                         'user_id' => $user_id,
                                         'is_active' => '1',
                                     ])->latest()->count();
-                                    
+
                                     $eportfolio = DB::table('exam_eportfolio')->where([
                                         'student_course_master_id' => $student_course_master_id,
                                         'exam_eportfolio.user_id' => $user_id,
@@ -269,16 +269,16 @@ class CommonController extends Controller
                                     $ementorId = isset($courseData[0]->ementor_id) ? $courseData[0]->ementor_id : 0;
                                     $ementorData = getData('users', ['name', 'last_name', 'email'], ['id' => $ementorId]);
                                     $unsubscribeRoute = url('/unsubscribe/'.base64_encode($ementorData[0]->email));
-                                    
+
                                     $recipientEmail = $ementorData[0]->email;
                                     $ccEmail = null;
-                                    
+
                                     if ($subEmentorId) {
                                         $subEmentorData = getData('users', ['name', 'last_name', 'email'], ['id' => $subEmentorId]);
                                         $recipientEmail = $subEmentorData[0]->email;
                                         $ccEmail = $ementorData[0]->email;
                                     }
-                                    
+
                                     $mailData = [
                                         '#EmentorName#' => $subEmentorId ? $subEmentorData[0]->name . " " . $subEmentorData[0]->last_name : $ementorData[0]->name . " " . $ementorData[0]->last_name,
                                         '#StudentName#' => Auth::user()->name . " " . Auth::user()->last_name,
@@ -287,10 +287,10 @@ class CommonController extends Controller
                                         '#Submission Date#' => now()->format('Y-m-d'),
                                         '#unsubscribeRoute#' => $ementorData[0]->email
                                     ];
-                                    
+
                                     mail_send(43, array_keys($mailData), array_values($mailData), $recipientEmail, $ccEmail);
 
-                                    // mail_send(43, 
+                                    // mail_send(43,
                                     //     [
                                     //         '#EmentorName#',
                                     //         '#StudentName#',
@@ -298,7 +298,7 @@ class CommonController extends Controller
                                     //         '#Course Name#',
                                     //         '#Submission Date#',
                                     //         '#unsubscribeRoute#',
-                                    //     ], 
+                                    //     ],
                                     //     [
                                     //         $ementorData[0]->name. " ". $ementorData[0]->last_name,
                                     //         Auth::user()->name. " ".Auth::user()->last_name,
@@ -306,10 +306,10 @@ class CommonController extends Controller
                                     //         $courseData[0]->course_title,
                                     //         now()->format('Y-m-d'),
                                     //         $ementorData[0]->email
-                                    //     ], 
+                                    //     ],
                                     //     $ementorData[0]->email
                                     // );
-                                    
+
                                     if ($eportfolio == 5) {
                                         $mentorIds = User::where('id', $ementorId)->pluck('id')->toArray();
                                         $mentorIds[] = $subEmentorId;
@@ -327,23 +327,23 @@ class CommonController extends Controller
                                     }
 
                                     // if (isset($examManagementMaster) && isset($examRemarkMasters) && $examManagementMaster == $examRemarkMasters && $eportfolio == 5) {
-                                    
+
                                     //     $unsubscribeRoute = url('/unsubscribe/'.base64_encode(Auth::user()->email));
-                                    //     mail_send(34, 
+                                    //     mail_send(34,
                                     //         [
                                     //             '#Name#',
                                     //             '#Course Name#',
                                     //             '#unsubscribeRoute#',
-                                    //         ], 
+                                    //         ],
                                     //         [
                                     //             Auth::user()->name. " ".Auth::user()->last_name,
                                     //             $courseData[0]->course_title,
                                     //             $unsubscribeRoute
-                                    //         ], 
+                                    //         ],
                                     //         Auth::user()->email
                                     //     );
                                     // }
-                                    
+
                                     if ($courseMaster[0]->category_id != 1) {
 
                                         $allEportfolioSubmitted = true;
@@ -375,12 +375,12 @@ class CommonController extends Controller
                                             );
                                         }
                                     }else{
-                            
+
                                         $eportfolio = DB::table('exam_eportfolio')->where([
                                             'user_id' => Auth::user()->id,
                                             'student_course_master_id' => $student_course_master_id,
                                         ])->count();
-                                        
+
                                         if ($examManagementMaster == $examRemarkMasters && $eportfolio == 5) {
                                             mail_send(
                                                 34,
@@ -460,7 +460,7 @@ class CommonController extends Controller
                         'english_test_submitted_on' =>  $this->time,
                         'english_test_attempt'=> $attemptData[0]->english_test_attempt - 1
                     ];
-                    
+
                     $attempt = is_exist('student_doc_verification', ['student_id' => $user_id, 'english_score' => '', 'english_level' => '', 'english_test_submitted_on' => '', 'english_level_view' => '']);
                     if (isset($attempt) && is_numeric($attempt) && $attempt > 0) {
                         return json_encode(['code' => 201, 'title' => "English test already submitted", 'message' => 'English test already submitted', "icon" => generateIconPath("error")]);
@@ -469,7 +469,7 @@ class CommonController extends Controller
                     $updateCourse = processData(['student_doc_verification', 'student_doc_id'], $select, ['student_id' => $user_id]);
 
                     if (isset($updateCourse) && is_array($updateCourse) && $updateCourse['status'] === TRUE) {
-                        
+
                         $attemptData = getData('student_doc_verification', ['english_test_attempt','english_level', 'english_score'], ['student_id' => $user_id]);
 
                         if(isset($attemptData) && $attemptData[0]->english_test_attempt === 1 && $attemptData[0]->english_score < 10){
@@ -479,9 +479,9 @@ class CommonController extends Controller
                             if($score < 10){
                                 mail_send(4, ['#Name#', '#Marks#', '#unsubscribeRoute#'], [Auth::user()->name. " ".Auth::user()->last_name , $score, $unsubscribeRoute], Auth::user()->email);
                             }else{
-                                
+
                                 // $student = DB::table('student_course_master')->where('user_id', Auth::user()->id)->first();
-                                
+
                                 // if ($student) {
                                     // $courseMaster = DB::table('course_master')->where('id', $student->course_id)->first();
                                     // if(!empty($courseMaster->duration_month)){
@@ -494,11 +494,11 @@ class CommonController extends Controller
                                     // }
                                     $unsubscribeRoute = url('/unsubscribe/'.base64_encode(Auth::user()->email));
                                     mail_send(3, ['#Name#', '#Marks#', '#unsubscribeRoute#'], [Auth::user()->name. " ".Auth::user()->last_name , $score, $unsubscribeRoute], Auth::user()->email);
-                                    
+
                                     // $this->service->verificationStatusUpdate($user_id);
-    
+
                                 // }
-    
+
                             }
                         }
 
@@ -506,11 +506,11 @@ class CommonController extends Controller
                         $english_score = $attemptDatas[0]->english_score;
                         $english_test_attempt = $attemptDatas[0]->english_test_attempt;
                         if($english_score >= 10){
-                            $score_level_text = "Pass"; 
+                            $score_level_text = "Pass";
                         }else if($english_score < 10){
                             $score_level_text = "Fail";
                         }else{
-                            $score_level_text = "Fail"; 
+                            $score_level_text = "Fail";
                         }
                         $data = [
                             "english_score" => $english_score,
@@ -521,7 +521,7 @@ class CommonController extends Controller
                         // echo $attemptDatas[0]->english_level;
                         // die;
                         $this->user->verificationStatutsUpdate($user_id);
-                         
+
                         $studentDocVerification = getData('student_doc_verification', ['student_id', 'identity_is_approved', 'edu_is_approved', 'english_score', 'english_test_attempt'], ['student_id' => auth()->user()->id]);
                         if($studentDocVerification[0]->identity_is_approved == 'Approved' && $studentDocVerification[0]->edu_is_approved == 'Approved' && $studentDocVerification[0]->english_score >= 10){
                             return json_encode(['code' => 200, 'title' => 'English test submitted successfully', "message" => "", "icon" => generateIconPath("success"),"data"=>$data, 'redirect' => 'student-my-learning']);
@@ -545,7 +545,7 @@ class CommonController extends Controller
             return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please Try Again', "icon" => generateIconPath("error")]);
         }
     }
-    
+
     public function verifyEnglishTestCode(Request $req)
     {
         if ($req->isMethod('POST') && $req->ajax() && Auth::check()) {
@@ -563,7 +563,7 @@ class CommonController extends Controller
                 $updateCourse = processData(['student_doc_verification', 'student_doc_id'], $select, ['student_id' => $user_id]);
 
                 User::where('id', $user_id)->update(['passed_via_english_code' => 1]);
-                
+
                 return response()->json([
                     'code' => 200,
                     'title' => "English Test Passed",
@@ -590,30 +590,30 @@ class CommonController extends Controller
         if(!empty($courseMaster[0])){
             $courseTitle = $courseMaster[0]->course_title;
             $examRemarkMasters = getData('exam_remark_master', ['id'], ['user_id' => $user_id, 'exam_type' => $exam_type, 'course_id' => $courseId], '1', 'id', 'desc');
-            
+
             if(!empty($examRemarkMasters[0])){
-    
+
                 $directory = public_path("storage/uploads_exam_snap/". $courseTitle. '/'. $examType. '/'. $examRemarkMasters[0]->id. '/');
-    
+
                 if (!file_exists($directory)) {
                     File::makeDirectory($directory, 0777, true);
                 }
-    
+
                 if (preg_match('/^data:image\/(\w+);base64,/', $snapshot, $type)) {
                     $data = substr($snapshot, strpos($snapshot, ',') + 1);
                     $type = strtolower($type[1]);
                     $data = base64_decode($data);
-    
+
                     if ($data === false) {
                         return response()->json(['error' => 'Base64 decode failed.'], 500);
                     }
-    
+
                     $imageName = 'snapshot_' . time() . '.' . $type;
                     $imagePath = $directory. '/'. $imageName;
                     if (file_put_contents($imagePath, $data) === false) {
                         return response()->json(['error' => 'Failed to save snapshot.'], 500);
                     }
-    
+
                     return response()->json(['success' => 'Snapshot saved.', 'path' => $imagePath]);
                 } else {
                     return response()->json(['error' => 'Invalid base64 data.'], 400);
@@ -656,7 +656,7 @@ class CommonController extends Controller
                             if (!$hasVideo) {
                                 return json_encode(['code' => 202, 'title' => "Quiz not Exist", 'message' => 'Something Went Wrong. Please Try Again...', "icon" => "error"]);
                             }
-                                                        
+
                             return json_encode(['code' => 200, 'data' => $QuizData]);
                         } else {
                             return json_encode(['code' => 202, 'title' => 'Something Went Wrong', 'message' => 'Please Try Again', "icon" => "error"]);
@@ -677,7 +677,7 @@ class CommonController extends Controller
         }
     }
 
-    
+
 
     public function englishCourseQuizSubmit(Request $req)
     {
@@ -747,14 +747,14 @@ class CommonController extends Controller
     public function getEnglishCourseVideo($section_id){
         if (Auth::check() && Auth::user()->role == 'user') {
             $doc_verified = getData('student_doc_verification',['identity_is_approved'],['student_id'=>Auth::user()->id]);
-            if($doc_verified[0]->identity_is_approved == "Approved"){ 
+            if($doc_verified[0]->identity_is_approved == "Approved"){
                 $section_id  = isset($section_id) ? base64_decode($section_id) : 0;
                 $where = ['section_id' => $section_id, 'is_deleted' => 'No'];
                 $VideoData = $this->sectionManage->getSectionContentVideo($where);
                 if (empty($VideoData) || !is_array($VideoData)) {
                     return view('frontend.coming-soon');
                 }
-                
+
                 $hasVideo = false;
 
                 foreach ($VideoData as $video) {
@@ -767,7 +767,7 @@ class CommonController extends Controller
                 if (!$hasVideo) {
                     return view('frontend.coming-soon');
                 }
-                
+
                 return view('frontend.video-view', compact('VideoData'));
             }else{
                 return redirect()->route('not-found');
@@ -779,14 +779,14 @@ class CommonController extends Controller
     public function getEnglishCoursePodcasts($section_id){
         if (Auth::check() && Auth::user()->role == 'user') {
             $doc_verified = getData('student_doc_verification',['identity_is_approved'],['student_id'=>Auth::user()->id]);
-            if($doc_verified[0]->identity_is_approved == "Approved"){ 
+            if($doc_verified[0]->identity_is_approved == "Approved"){
                 $section_id  = isset($section_id) ? base64_decode($section_id) : 0;
                 $where = ['section_id' => $section_id, 'is_deleted' => 'No'];
                 $VideoData = $this->sectionManage->getSectionContentVideo($where);
                 if (empty($VideoData) || !is_array($VideoData)) {
                     return view('frontend.coming-soon');
                 }
-                
+
                 $hasVideo = false;
 
                 foreach ($VideoData as $video) {
@@ -820,6 +820,6 @@ class CommonController extends Controller
 
         return response()->json($courses);
     }
-    
+
 }
 ?>

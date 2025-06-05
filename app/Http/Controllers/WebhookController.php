@@ -2,9 +2,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\{Log,Validator};
 use Stripe\Webhook;
+use App\Services\GoogleCalendarService;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\CourseModule;
 
 class WebhookController extends Controller
 {
@@ -52,4 +55,66 @@ class WebhookController extends Controller
         // For example, mark the order as paid in your database
         Log::info('Checkout session completed for user: ' . $user_id);
     }
+
+    public function redirectToGoogle(GoogleCalendarService $calendarService)
+    {
+        return redirect($calendarService->getAuthUrl());
+    }
+
+    public function handleGoogleCallback(Request $request, GoogleCalendarService $calendarService)
+    {
+        $calendarService->handleCallback($request->code);
+        return redirect('/');
+    }
+
+   public function scheduleMeeting(Request $request, GoogleCalendarService $calendarService)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string',
+        'date' => 'required|date',
+        'time' => 'required',
+        'endtime'=>'required',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'code' => 202,
+            'data' => $validator->errors(),
+        ]);
+    }
+
+    try {
+        $start = Carbon::parse("{$request->date} {$request->time}",'Europe/Malta');
+        #$end = (clone $start)->addHour();
+        $end = Carbon::parse("{$request->date} {$request->endtime}",'Europe/Malta');
+        $course= base64_decode($request->course_id);
+
+        $useremail = CourseModule::where('id',$course)->with('Ementor')->get();
+        dd($useremail[0]['Ementor']['email']);
+        $eventData = [
+            'summary' => $request->name,
+            'description' => 'Meeting scheduled via web form',
+            'start' => $start,
+            'end' => $end,
+            'attendee_email' => 'ankita@angel-portal.com',
+        ];
+
+        $meetLink = $calendarService->createGoogleMeetEvent($eventData);
+
+        return response()->json([
+            'code' => 200,
+            'title' => 'Meeting Scheduled',
+            'message' => 'Google Meet link created and emailed!',
+            'icon' => 'success',
+            'link' => $meetLink,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'code' => 500,
+            'message' => 'Something went wrong: ' . $e->getMessage(),
+        ]);
+    }
+}
+
+
 }

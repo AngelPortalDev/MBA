@@ -3,7 +3,7 @@
 <section class="container d-flex flex-column">
     <div class="row align-items-center justify-content-center g-0 h-lg-100 py-8">
         <div class="col-lg-5 col-md-8 py-8 py-xl-0">
-            
+
             @if(session('rate_limit_error'))
                 <div id="rateLimitAlert" class="alert alert-danger">
                     {{ session('rate_limit_error') }}
@@ -12,7 +12,7 @@
             <!-- Card -->
             <div class="card shadow">
                 <!-- Card body -->
-              
+             {{-- <p>{{  print_r(session('google_token'), true) }}</p> --}}
                 <div class="card-body p-6">
                     <div class="mb-4 text-center">
                         <h2 class="mb-1 fw-bold">Log in to E-Study </h2>
@@ -53,16 +53,16 @@
                         <div class="alert alert-success" id="successMessage">
                             {{ session('success') }}
                         </div>
-                    
+
                         <script>
                             setTimeout(function() {
                                 document.getElementById('successMessage').style.display = 'none';
                             }, 5000);
                         </script>
                     @endif
-                
 
-                 
+
+
                     <div class="alert alert-danger" style="display:none;">
                         <div class="invalid-feedback-error" ></div>
                     </div>
@@ -124,6 +124,16 @@
                             </span>
                         </div>
                     </form>
+
+
+                    {{-- <form action="{{ route('schedule.meeting') }}" method="POST">
+    @csrf
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <label>Date & Time:</label>
+    <input type="datetime-local" name="datetime" required>
+    <button type="submit">Schedule</button>
+</form> --}}
                 </div>
             </div>
         </div>
@@ -136,6 +146,6 @@
         if (alert) {
             alert.style.display = 'none';
         }
-    }, 5000); 
+    }, 5000);
 </script>
 @endsection

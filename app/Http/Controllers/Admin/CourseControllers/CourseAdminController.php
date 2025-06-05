@@ -94,7 +94,7 @@ class CourseAdminController extends Controller
             if ($req->hasFile('trailor_thumbnail')) {
                 $validate_rules = array_merge($validate_rules, ['trailor_thumbnail' => 'mimes:jpeg,png,jpg,svg|max:1024']);
             }
-            
+
             if ($req->hasFile('trailor_vid')) {
                 $validate_rules = array_merge($validate_rules, ['trailor_vid' => 'mimes:mp4|max:512000']);
             }
@@ -105,25 +105,25 @@ class CourseAdminController extends Controller
             $validate = Validator::make($req->all(), $validate_rules);
 
             if (!$validate->fails()) {
-                           
+
                 if ($req->hasFile('thumbnail_img')) {
                     $thumbnail_file =  UploadFiles($thumbnail_img, 'course/thumbnailsContent', '');
                     if ($thumbnail_file === FALSE) {
                         return json_encode(['code' => 201, 'message' => 'File is corrupt', 'title' => "File is corrupt", "icon" => 'error']);
                     }
                 }
-            
+
 
                 $collection_id = '';
                 $ext_trail_videoId='';
                 $ext_trailer_thumbnail='';
-             
+
                 if ($isUpdate === FALSE) {
-                  
+
                     $collection_id = $this->CourseModule->getCollectionIdBn($title, 2);
-                 
+
                 } else {
-                       
+
                     $collectionData = getData('course_master', ['bn_collection_id', 'bn_course_trailer_url','trailer_thumbnail_file'], ['id' => $course_id]);
                     $ext_trail_videoId = $collectionData[0]->bn_course_trailer_url;
                     $collection_id = $collectionData[0]->bn_collection_id;
@@ -133,7 +133,7 @@ class CourseAdminController extends Controller
                 }
                 $trailor_bn_id = '';
                 $trailer_thumbnailFileName = '';
-                
+
                 if (isset($collection_id) && !empty($collection_id)) {
                     if ($req->hasFile('trailor_thumbnail')) {
                         $trailer_thumbnail_file =  UploadFiles($trailor_thumbnail, 'course/thumbnailTrailer', $ext_trailer_thumbnail);
@@ -161,10 +161,10 @@ class CourseAdminController extends Controller
                                     // if (isset($trailer_thumbnail_Id) && $trailer_thumbnail_Id !== FALSE) {
                                     //     $trailer_thumbnailFileName = $trailer_thumbnail_Id['thumbnailFileName'];
                                     // }
-                                    
+
                                 }
                             }
-                           
+
 
                         } else {
 
@@ -181,7 +181,7 @@ class CourseAdminController extends Controller
                                     // if (isset($trailer_thumbnail_Id) && $trailer_thumbnail_Id !== FALSE) {
                                     //     $trailer_thumbnailFileName = $trailer_thumbnail_Id['thumbnailFileName'];
                                     // }
-                                    
+
                                 }
                             } else {
                                 $getContent =  $this->CourseModule->getVideoId($collection_id, $trailor_video, $title . " (Trailer Video)", 2);
@@ -197,7 +197,7 @@ class CourseAdminController extends Controller
                                         // if (isset($trailer_thumbnail_Id) && $trailer_thumbnail_Id !== FALSE) {
                                         //     $trailer_thumbnailFileName = $trailer_thumbnail_Id['thumbnailFileName'];
                                         // }
-                                        
+
                                     }
                                 }
                             }
@@ -238,11 +238,11 @@ class CourseAdminController extends Controller
                 if($course_id == ''){
                     $select = array_merge($select, ['created_at' => $this->time]);
                 }
-                print_r($req->all());
-                die;
+                // print_r($req->all());
+                // die;
                 if (isset($req->module_name) && !empty($module_name)) {
                     $select = array_merge($select, ['bn_module_name' => $module_name]);
-                }          
+                }
 
                 if ($req->hasFile('thumbnail_img')) {
                     if (isset($thumbnail_file['url']) && Storage::disk('local')->exists($thumbnail_file['url'])) {
@@ -255,7 +255,7 @@ class CourseAdminController extends Controller
                     } else {
                         return json_encode(['code' => 201, 'title' => "Unable to Upload Thumbanail", 'message' => 'Please Try Again', "icon" => "error"]);
                     }
-                }         
+                }
                 if ($req->hasFile('trailor_vid')) {
                     $trailer_filename = $trailor_video->getClientOriginalName();
                     if (!empty($ext_trail_videoId) && !empty($trailor_bn_id) && $trailor_bn_id != $ext_trail_videoId) {
@@ -277,18 +277,18 @@ class CourseAdminController extends Controller
                     }
                 }
                 if ($req->hasFile('trailor_thumbnail')) {
-                    
+
                     $trailor_thumbnail_file_name = $trailor_thumbnail->getClientOriginalName();
                     if (!empty($ext_trailer_thumbnail) && !empty($trailer_thumbnail_file) && $trailer_thumbnail_file != $ext_trailer_thumbnail) {
-                        $select = array_merge($select, 
-                        [ 
+                        $select = array_merge($select,
+                        [
                             'trailer_thumbnail_file' => !empty($trailer_thumbnail_file['url']) ? $trailer_thumbnail_file['url'] : '',
                             'trailer_thumbnail_file_name'=>$trailor_thumbnail_file_name
                         ]);
                     }else if(!empty($trailer_thumbnail_file['url'])){
 
-                        $select = array_merge($select, 
-                        [ 
+                        $select = array_merge($select,
+                        [
                             'trailer_thumbnail_file' => !empty($trailer_thumbnail_file['url']) ? $trailer_thumbnail_file['url'] : '',
                             'trailer_thumbnail_file_name'=>$trailor_thumbnail_file_name
                         ]);
@@ -302,8 +302,8 @@ class CourseAdminController extends Controller
                 } else {
                     $updateUserProfile = processData(['course_master', 'id'], $select, $courseWhere);
                 }
-                print_r($updateUserProfile);
-                die;
+                // print_r($updateUserProfile);
+                // die;
                 if (isset($updateUserProfile) && is_array($updateUserProfile) && $updateUserProfile['status'] === TRUE) {
 
                     $where = ['course_id' => $course_id];
@@ -363,7 +363,7 @@ class CourseAdminController extends Controller
     }
     public function courseUpdateOther(Request $req)
     {
-        
+
         if ($req->isMethod('POST') && $req->ajax() && Auth::check()) {
             // $course_id = Auth::user()->id;
             $course_overview =  isset($req->course_overview) ? htmlspecialchars_decode($req->input('course_overview')) : '';
@@ -472,7 +472,7 @@ class CourseAdminController extends Controller
                 // $where = ['section_name' => $section_title];
                 // $exists = is_exist('course_section_masters', $where);
                 // if (isset($exists) && $exists === 0) {
-                    
+
                     $libraryId = env('AWARD_LIBRARY_ID');
                     // $collectionIdExist = $this->CourseModule->checkCollectionIdExist($libraryId, $section_title);
                     // if(isset($collectionIdExist['code']) && $collectionIdExist['code'] == 200){
@@ -489,9 +489,9 @@ class CourseAdminController extends Controller
                     // if ($sectionExists) {
                     //     return json_encode(['code' => 201, 'title' => "Section already exist", 'message' => 'Please Try Again', "icon" => "error"]);
                     // }else{
-                        
+
                         $collectionId = $this->CourseModule->createCollectionIdOnBunnyStream($libraryId, htmlspecialchars_decode($section_title));
-                        
+
                         if(isset($collectionId['code']) && $collectionId['code'] == 200){
                             $select = [
                                 'section_name' => htmlspecialchars_decode($section_title),
@@ -499,7 +499,7 @@ class CourseAdminController extends Controller
                                 'created_at' =>  $this->time,
                                 'bn_collection_id' => $collectionId['data']['guid']
                             ];
-                            
+
                             $updateSection = processData(['course_section_masters', 'id'], $select);
                             if (isset($updateSection) && $updateSection === FALSE) {
                                 return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please Try Again', "icon" => generateIconPath("error")]);
@@ -566,7 +566,7 @@ class CourseAdminController extends Controller
             $course_id = isset($req->course_id) ? base64_decode($req->input('course_id')) : '';
             $videoFile = $req->hasFile('video_file') ? $req->file('video_file') : '';
             $podcast_thumbnail = $req->hasFile('podcast_thumbnail') ? $req->file('podcast_thumbnail') : '';
-            
+
             $validate_rules = [
                 'about_module' => 'string',
             ];
@@ -614,9 +614,9 @@ class CourseAdminController extends Controller
                         ['id', 'bn_video_url_id', 'bn_collection_id','video_file_name'],
                         ['course_master_id' => $course_id]
                     );
-                    
+
                         if ($req->hasFile('video_file')) {
-                           
+
                             $podcast_filename = $videoFile->getClientOriginalName();
 
                             if (isset($exists) && is_numeric($exists) && $exists === 0) {
@@ -636,11 +636,11 @@ class CourseAdminController extends Controller
                                         // }
                                     }
                                 }
-                         
+
                             } else {
 
-                          
-                               
+
+
                                 if($getOtherVideo[0]->bn_video_url_id == ''){
                                     $vidoId =   $this->CourseModule->getVideoId($getModuleData[0]->bn_collection_id, $videoFile, " (Podcast Video)", 2);
                                     if ($req->hasFile('podcast_thumbnail')) {
@@ -658,7 +658,7 @@ class CourseAdminController extends Controller
                                     }
                                 }else{
                                     $vidoId = $this->CourseModule->videoAction($getOtherVideo[0]->bn_video_url_id, [$collection_id, $videoFile, " Podcast Video"], 'REPLACE', 2);
-         
+
                                     if ($req->hasFile('podcast_thumbnail')) {
                                         $podcast_thumbnail_file_name = $podcast_thumbnail->getClientOriginalName();
                                         $podcast_thumbnail_file =  UploadFiles($podcast_thumbnail, 'course/thumbnailPodcast', $ext_podcast_thumbnail);
@@ -685,12 +685,12 @@ class CourseAdminController extends Controller
                             // }
                         }
 
-           
+
 
                     // return  $vidoId;
                     if (isset($vidoId) && $vidoId['status'] === false) {
                             return json_encode(['code' => 201, 'title' => "Unable to Upload Video", 'message' => 'Please Try Again', "icon" => "error"]);
-                      
+
                         } else {
 
                             $select = [
@@ -725,7 +725,7 @@ class CourseAdminController extends Controller
                             // }
                             return json_encode(['code' => 200, 'title' => 'Successfully Uploaded', "message" => "Course podcast uploaded successfully", "icon" => "success", "data" => base64_encode($updateCourse['id'])]);
                         }
-                       
+
                     }
                     if (isset($vidoId) && $vidoId['status'] === false) {
                         return json_encode(['code' => 201, 'title' => "Unable to Create Video", 'message' => 'Please Try Again', "icon" => "warning"]);
@@ -769,7 +769,7 @@ class CourseAdminController extends Controller
     public function sectionList($cat = '', $action = '')
     {
 
-     
+
         if (Auth::check()) {
             $sectionData = [];
             $where = ['is_deleted' => 'No'];
@@ -813,7 +813,7 @@ class CourseAdminController extends Controller
     }
 
     public function sectionAlreadyAdded(Request $req)
-    {   
+    {
 
         if (Auth::check() && !empty($req->course_id) && isset($req->course_id) && $req->ajax()) {
             $sectionData = [];
@@ -826,7 +826,7 @@ class CourseAdminController extends Controller
             }
         }
         return redirect('/login');
-    } 
+    }
     public function sectionListNew($cat = '', $action = '')
     {
         if (Auth::check()) {
@@ -843,7 +843,7 @@ class CourseAdminController extends Controller
             foreach ($data as $content) {
                 $content_type = $content->content_type_id;
 
-         
+
                 $content_id = $content->content_id;
                 $getData = [];
                 $displayIcon ='';
@@ -866,7 +866,7 @@ class CourseAdminController extends Controller
                     $id = isset($getData[0]->id) ? base64_encode($getData[0]->id) : '';
                     $doc_file_name = isset($getData[0]->doc_file_name) ? $getData[0]->doc_file_name : '';
                     $content_type =  base64_encode($content_type);
-                    $extensionFile = pathinfo($doc_file_name); 
+                    $extensionFile = pathinfo($doc_file_name);
                     if(!empty($extensionFile['extension'])){
                         if($extensionFile['extension'] == 'pdf'){
                             $displayIcon = "<i class='bi bi-file-pdf'></i>";
@@ -879,10 +879,10 @@ class CourseAdminController extends Controller
 
 
                 }elseif (isset($content_type) && !empty($content_type) && $content_type === 3) {
-                 
+
                     $where = ['is_deleted' => 'No', 'id' => $content_id];
                     $select = ['id', 'quiz_tittle'];
-                    $table = 'exam_quiz';                  
+                    $table = 'exam_quiz';
                     $getData = getData($table, $select, $where);
                     $title = isset($getData[0]->quiz_tittle) ? $getData[0]->quiz_tittle : '';
                     $id = isset($getData[0]->id) ? base64_encode($getData[0]->id) : '';
@@ -896,14 +896,14 @@ class CourseAdminController extends Controller
                                 <div class='d-flex align-items-center justify-content-between'>
                                                             <h5 class='mb-0 text-truncate'>
                                                                 <a href='#' class='text-inherit'>
-                                                                <span class='align-middle fs-4'> 
+                                                                <span class='align-middle fs-4'>
                                                                    $displayIcon
                                                                    $title
                                                                     </span>
                                                                 </a>
                                                             </h5>
                                                             <div>
-                                                             
+
                                                                 <a href='javascript:void(0)' class='me-1 text-inherit deleteContent' data-delete_id='$id' data-content_type='$content_type' data-
                                                                     data-bs-toggle='tooltip' data-placement='top'
                                                                     aria-   ='Delete' data-bs-original-title='Remove'>
@@ -919,7 +919,7 @@ class CourseAdminController extends Controller
                 return view('/admin/course/section-edit', compact('sectionData'));
             }
 
-            
+
             return response()->json($sectionData);
         }
         return redirect('/login');
@@ -974,7 +974,7 @@ class CourseAdminController extends Controller
                     ];
                 }
             }
-        
+
             $CourseData = $this->CourseModule->getCouresDetails($where,[],$offset,$limit,$searchValue);
             $CourseDatas = $CourseData['data'];
             $totalRecords = $CourseData['count'];
@@ -982,13 +982,13 @@ class CourseAdminController extends Controller
             foreach ($CourseDatas as $key => $course) {
                 $CourseDatas[$key]['is_enrolled'] = is_enrolled('', $course['id']);
             }
-            
+
             $response = [
                 "draw" => intval($request->input('draw')), // Draw counter for DataTables
                 "recordsTotal" => $totalRecords, // Total number of records
                 "recordsFiltered" => $totalRecords, // Number of records after filtering (same as total if no filtering is applied)
                 "data" => $CourseDatas // The actual data to be displayed
-            ];            
+            ];
             return response()->json($response);
 
 
@@ -1019,7 +1019,7 @@ class CourseAdminController extends Controller
             $course_duration = isset($req->course_duration) ? htmlspecialchars($req->input('course_duration')) : '';
             $discord_joining_link = isset($req->discord_joining_link) ? htmlspecialchars($req->input('discord_joining_link')) : null;
             $discord_channel_link = isset($req->discord_channel_link) ? htmlspecialchars($req->input('discord_channel_link')) : null;
-            $progress_tab = isset($req->progress_tab) && $req->has('progress_tab') ? '0' : '1';  
+            $progress_tab = isset($req->progress_tab) && $req->has('progress_tab') ? '0' : '1';
             $full_time_course_duration = isset($req->full_time_course_duration) ? htmlspecialchars($req->input('full_time_course_duration')) : '';
             $validate_rules = [
                 'category_id' => 'required',
@@ -1045,7 +1045,7 @@ class CourseAdminController extends Controller
             // }else{
             //     $course_old_price_val = $final_price;
             // }
-        
+
             if (!$validate->fails()) {
                 $select = [
                     'category_id' => $category_id,
@@ -1103,7 +1103,7 @@ class CourseAdminController extends Controller
     }
 
 
-    // Function Terminated 
+    // Function Terminated
     public function courseMediaUpdateAdd(Request $req)
     {
         if ($req->isMethod('POST') && $req->ajax() && Auth::check()) {
@@ -1143,10 +1143,10 @@ class CourseAdminController extends Controller
                 $trailer_thumbnailFileName = '';
                 $trailer_thumbnail_file= '';
 
-               
+
 
                 $collectionData = getData('course_master', ['bn_collection_id', 'bn_course_trailer_url','trailer_thumbnail_file','podcast_thumbnail_file','podcast_thumbnail_file_name','course_title','thumbnail_file_name','trailer_thumbnail_file_name','course_trailer_file_name','course_thumbnail_file'], ['id' => $course_id]);
-                
+
                 $title = isset($collectionData[0]->course_title) ? $collectionData[0]->course_title : '';
 
                 if ($collectionData[0]->bn_collection_id == '') {
@@ -1154,7 +1154,7 @@ class CourseAdminController extends Controller
                     $collection_id = $this->CourseModule->getCollectionIdBn($title, 1);
 
                 } else {
-  
+
                     $collection_id = $collectionData[0]->bn_collection_id;
 
                     $podcast_thumbnail_file_url =  isset($collectionData[0]->podcast_thumbnail_file) ? $collectionData[0]->podcast_thumbnail_file : '';
@@ -1203,13 +1203,13 @@ class CourseAdminController extends Controller
                                     // if (isset($trailer_thumbnail_Id) && $trailer_thumbnail_Id !== FALSE) {
                                     //     $trailer_thumbnailFileName = $trailer_thumbnail_Id['thumbnailFileName'];
                                     // }
-                                    
+
                                 }
                             }
-                           
+
 
                         } else {
-                            
+
                             if (isset($collectionData['trailor_bn_id']) && !empty($collectionData['trailor_bn_id'])) {
                                 $getContent =  $this->CourseModule->videoAction($collectionData['trailor_bn_id'], [$collection_id, $trailor_vid, $title], 'REPLACE', 1);
                                 $trailer_filename = $trailor_vid->getClientOriginalName();
@@ -1224,7 +1224,7 @@ class CourseAdminController extends Controller
                                     // if (isset($trailer_thumbnail_Id) && $trailer_thumbnail_Id !== FALSE) {
                                     //     $trailer_thumbnailFileName = $trailer_thumbnail_Id['thumbnailFileName'];
                                     // }
-                                    
+
                                 }
                             } else {
                                 $getContent =  $this->CourseModule->getVideoId($collection_id, $trailor_vid, $title . " (Trailer Video)", 1);
@@ -1242,7 +1242,7 @@ class CourseAdminController extends Controller
                                         // if (isset($trailer_thumbnail_Id) && $trailer_thumbnail_Id !== FALSE) {
                                         //     $trailer_thumbnailFileName = $trailer_thumbnail_Id['thumbnailFileName'];
                                         // }
-                                        
+
                                     }
                                 }
                             }
@@ -1260,11 +1260,11 @@ class CourseAdminController extends Controller
 
                     $whereOtherVideo = ['course_master_id' => $course_id, 'video_type' => 1, 'is_deleted' => 'No'];
                     $exists = is_exist('course_other_videos', $whereOtherVideo);
-                    
+
                         if ($req->hasFile('video_file')) {
-                           
+
                             $podcast_filename = $videoFile->getClientOriginalName();
-                           
+
                             if (isset($exists) && is_numeric($exists) && $exists === 0) {
                                 $vidoId =   $this->CourseModule->getVideoId($collection_id, $videoFile, " (Podcast Video)", 1);
                                 if (isset($vidoId) && $vidoId !== FALSE) {
@@ -1281,11 +1281,11 @@ class CourseAdminController extends Controller
                                         // }
                                     }
                                 }
-                         
+
                             } else {
 
-                                
-                               
+
+
                                 if($getOtherVideo[0]->bn_video_url_id == ''){
                                     $podcast_filename = $videoFile->getClientOriginalName();
 
@@ -1306,7 +1306,7 @@ class CourseAdminController extends Controller
                                 }else{
                                     $podcast_filename = $videoFile->getClientOriginalName();
                                     $vidoId = $this->CourseModule->videoAction($getOtherVideo[0]->bn_video_url_id, [$collection_id, $videoFile, " Podcast Video"], 'REPLACE', 1);
-         
+
                                     if ($req->hasFile('podcast_thumbnail')) {
                                         $podcast_thumbnail_file_name = $podcast_thumbnail->getClientOriginalName();
                                         $podcast_thumbnail_file =  UploadFiles($podcast_thumbnail, 'course/thumbnailPodcast', $podcast_thumbnail_file_url);
@@ -1328,13 +1328,13 @@ class CourseAdminController extends Controller
                                 $podcast_thumbnail_file_url = $podcast_thumbnail_file['url'];
                             }
                         }
-                        
+
                 } else {
                     return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Unable to Create Video Module2', "icon" => "error"]);
                 }
-                
 
-                
+
+
                 $select = [
                     'course_master_id' => $course_id,
                     'bn_collection_id' =>  $collection_id,
@@ -1377,7 +1377,7 @@ class CourseAdminController extends Controller
                 // }
 
 
-               
+
 
                 if (isset($updateCourseMaster) && $updateCourseMaster === FALSE) {
                     return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please Try Again', "icon" => "error"]);
@@ -1430,7 +1430,7 @@ class CourseAdminController extends Controller
     public function AwardCourseList(Request $request,$cat = '',$action ='')
     {
         if (Auth::check()) {
-            
+
             $CourseData = [];
             $where = [];
             $limit = $request->input('length'); // Number of records per page
@@ -1461,7 +1461,7 @@ class CourseAdminController extends Controller
                 $CourseData = $this->CourseModule->getCouresDetails($where,[],$offset,$limit,$searchValue);
                 $CourseDatas = $CourseData['data'];
                 $totalRecords = $CourseData['count'];
-                             
+
                 foreach ($CourseDatas as $key => $course) {
                     // Check if the course is enrolled using a custom function `is_enrolled`
                     $CourseDatas[$key]['is_enrolled'] = is_enrolled('', $course['id']);
@@ -1481,18 +1481,18 @@ class CourseAdminController extends Controller
                 "recordsTotal" => $totalRecords, // Total number of records
                 "recordsFiltered" => $totalRecords, // Number of records after filtering (same as total if no filtering is applied)
                 "data" => $CourseDatas// The actual data to be displayed
-            ];            
+            ];
             return response()->json($response);
 
 
         }
         return redirect('/login');
     }
-    
+
     public function AllCourseList(Request $request,$action ='')
     {
         if (Auth::check()) {
-            
+
             $CourseData = [];
             $where = [];
             $limit = $request->input('length'); // Number of records per page
@@ -1523,7 +1523,7 @@ class CourseAdminController extends Controller
                 $CourseData = $this->CourseModule->getCouresDetails($where,[],$offset,$limit,$searchValue);
                 $CourseDatas = $CourseData['data'];
                 $totalRecords = $CourseData['count'];
-                             
+
                 foreach ($CourseDatas as $key => $course) {
                     // Check if the course is enrolled using a custom function `is_enrolled`
                     $CourseDatas[$key]['is_enrolled'] = is_purchased('', $course['id']);
@@ -1535,13 +1535,13 @@ class CourseAdminController extends Controller
                 $CourseDatas = $CourseData['data'];
                 $totalRecords = $CourseData['count'];
             }
-            
+
             $response = [
                 "draw" => intval($request->input('draw')), // Draw counter for DataTables
                 "recordsTotal" => $totalRecords, // Total number of records
                 "recordsFiltered" => $totalRecords, // Number of records after filtering (same as total if no filtering is applied)
                 "data" => $CourseDatas// The actual data to be displayed
-            ];       
+            ];
             return response()->json($response);
 
 
@@ -1555,10 +1555,10 @@ class CourseAdminController extends Controller
             $admin_id = Auth::user()->id;
             $section_ids =  isset($req->section_id) && is_array($req->section_id) ? $req->input('section_id') : [];
             $course_id =  isset($req->course_id) ? base64_decode($req->input('course_id')) : 0;
-            
+
             $where = ['id' => $course_id];
             $existsCourse = is_exist('course_master', $where);
-          
+
             if (isset($existsCourse) && isset($existsCourse) && $existsCourse > 0) {
                 $getExistSections = getDataArray('course_managment_master', ['section_id'], ['course_master_id' => $course_id, 'is_deleted' => 'No']);
 
@@ -1634,7 +1634,7 @@ class CourseAdminController extends Controller
                 } catch (\Throwable $th) {
                     return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please Try Again', "icon" => "error"]);
                 }
-             
+
             // } else {
             //     return json_encode(['code' => 201, 'title' => "Section Not Exists ", 'message' => 'Please Assign Any One Section', "icon" => "error"]);
             // }
@@ -1656,7 +1656,7 @@ class CourseAdminController extends Controller
 
                 $exists = is_exist('course_master', ['id' => $course_id]);
                 if (isset($exists) && is_numeric($exists) && $exists > 0) {
-                   
+
                     $getExistAwardCourse = getDataArray('master_course_management', ['course_id','optional_course_id'], ['award_id' => $course_id, 'is_deleted' => 'No']);
                     try {
                         foreach ($getExistAwardCourse as $data) {
@@ -1671,7 +1671,7 @@ class CourseAdminController extends Controller
                                 'last_update_by' => $admin_id,
                             ];
                             processData(['master_course_management', 'id'], $select, $where);
-                        }   
+                        }
 
                         $i = 0;
 
@@ -1752,7 +1752,7 @@ class CourseAdminController extends Controller
                     }
                         // $whereCourseSection = '';
                         // foreach ($request->main_course_id as $key => $value) {
-                        
+
                         //     $whereCourseSection = ['award_id' => $course_id,'course_id'=>base64_decode($value)];
                         //     $existsMasterSection = is_exist('master_course_management', $whereCourseSection);
 
@@ -1778,7 +1778,7 @@ class CourseAdminController extends Controller
                         //             $i++;
                         //         }
                         // }
-                        
+
                         // $decodedValues = array_map('base64_decode', $request->main_course_id);
 
                         // $concatenatedString = implode(',', $decodedValues);
@@ -1789,7 +1789,7 @@ class CourseAdminController extends Controller
                         //     ->whereNotIn('course_id', $myArray)
                         //     ->where('award_id',$course_id)
                         //     ->get();
-                            
+
 
                         //     foreach($MasterCourseData as $award){
                         //         $select = [
@@ -1798,7 +1798,7 @@ class CourseAdminController extends Controller
                         //         $whereCourseSection = ['id'=> $award->id];
 
                         //         $updateCourseDelete = processData(['master_course_management', 'id'], $select,$whereCourseSection);
-                               
+
                         //     }
                     if($request->main_course_id){
                         if (isset($i) && $i > 0) {
@@ -1836,7 +1836,7 @@ class CourseAdminController extends Controller
         return view('admin.course.add-course', compact('CourseData'));
     }
 
-    
+
     public function statusCourse(Request $req)
     {
         if ($req->isMethod('POST') && $req->ajax() && Auth::check()) {
@@ -1850,12 +1850,12 @@ class CourseAdminController extends Controller
                 ];
                 $validate = validator::make($req->all(), $rules);
                 if (!$validate->fails()) {
-                  
-                try {    
+
+                try {
                     $id =  isset($req->id) ? base64_decode($req->input('id')) : '';
                     $where = ['id' => $id, 'is_deleted' => 'No'];
                     $exists = is_exist($table, $where);
-                   
+
                     if (isset($exists) && $exists > 0) {
                         $where = ['id' => $id];
                         if($status == 'course_status_publish'){
@@ -1890,7 +1890,7 @@ class CourseAdminController extends Controller
 
                         }
                         if (isset($updateCourse) && $updateCourse['status'] == TRUE) {
-                            
+
                             $dashboardController = new DashboardController();
                             $dashboardData = $dashboardController->getDashboardData();
 
@@ -1898,14 +1898,14 @@ class CourseAdminController extends Controller
                         }
                     }
                     return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please try again', "icon" => "error"]);
-                    
+
                 } catch (\Throwable $th) {
                     return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please try again', "icon" => "error"]);
                 }
             }else {
                 return json_encode(['code' => 201, 'title' => "Something Went Wrong ", 'message' => 'Please try again', "icon" => "error"]);
             }
-             
+
         } else {
             return json_encode(['code' => 201, 'title' => "Already Deleted ", 'message' => 'Please try unique name', "icon" => "error"]);
         }
@@ -1961,7 +1961,7 @@ class CourseAdminController extends Controller
                         // DB::beginTransaction();
                         $deleteStudent = $this->CourseModule->deleteCourseData($course_id);
                         return response()->json(['code' => 200, 'title' => 'Records Successfully Deleted', 'icon' => 'success']);
-                        
+
                         // DB::rollback();
                         return json_encode(['code' => 201, 'title' => "Something Went Wrong", 'message' => 'Please Try Again', "icon" => "error"]);
                     } catch (\Throwable $th) {
@@ -2013,16 +2013,16 @@ class CourseAdminController extends Controller
                     ];
                     $MasterCourseData = $this->MasterCourseManage->getMasterCouresData($where);
                     //  return response()->json(['data' => $awardCourseData]);
-                    
+
                       return view('admin/course/admin-master-course-panel', compact('MasterCourseData','course_id'));
-                    
+
                 }
             }
         }
         return redirect()->back();
     }
 
-    
+
     public function searchCourseList(Request $req)
     {
         if (Auth::check() && !empty($req->search) && isset($req->search) && !empty($req->course_id) && isset($req->course_id) && $req->ajax()) {
@@ -2035,7 +2035,7 @@ class CourseAdminController extends Controller
         return redirect('/login');
     }
     public function CourseAlreadyAdded(Request $req)
-    {   
+    {
 
         if (Auth::check() && !empty($req->course_id) && isset($req->course_id) && $req->ajax()) {
             $sectionData = [];
@@ -2056,5 +2056,5 @@ class CourseAdminController extends Controller
             }
         }
         return redirect('/login');
-    } 
+    }
 }

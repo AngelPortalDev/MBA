@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            
+
             <!-- <form class="d-flex align-items-center col-12 col-lg-3"> -->
             <div class="col-lg-8 col-12 text-end pt-2">
                 <div class="d-sm-flex justify-content-sm-end">
@@ -90,8 +90,8 @@
                                     </li>
                                 </ul>
                             </div>
-    
-    
+
+
                              <!-- Search Form -->
                              <div class="col-12 col-xxl-2 mt-3 d-flex">
                                 <form class="d-flex align-items-center w-100">
@@ -101,7 +101,7 @@
                                     <input type="search" class="form-control ps-6 searchCourse" id="searchInput" placeholder="Search Here">
                                 </form>
                             </div>
-                        </div>                      
+                        </div>
                         <div class="allCourseaward d-flex">
                             <!-- Radio Buttons -->
                             <div class="col-12 col-xxl-2 col-xl-3 col-lg-4 d-flex align-items-center mt-5">
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <!-- Export Form -->
                             <form id="exportFormWithoutFilter" action="{{ route('export') }}" method="POST" class="needs-validation d-flex flex-column flex-md-row allawardform align-items-center align-items-md-start col-12 col-xxl-10 col-xl-9 col-lg-8 mt-3" novalidate>
                                 @csrf
@@ -132,10 +132,10 @@
                                         <div class="invalid-feedback">Please provide a valid end date.</div>
                                     </div>
                                 </div>
-                                
+
                                 <input type="hidden" name="category" id="category" value="all">
                                 <input type="hidden" name="export" value="awardCourseData">
-                                
+
                                 <!-- Label for Export Button -->
                                 <div class="col-md-4 mb-2 " style="display: flex; flex-direction: column;">
                                     <label for="exportButtonWithoutFilter" class="form-label mb-0 ms-2" style="visibility: hidden">Export Data</label>
@@ -144,11 +144,11 @@
                                     </a>
                                 </div>
                             </form>
-                            
+
                         </div>
-                       
+
                     </div>
-                    
+
 
 
 
@@ -176,12 +176,12 @@
                                                 <th>Status</th>
                                                 <th>Enrolled</th>
                                                 <th>Action</th>
-
+                                                <th>Schedule</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {{-- <tr>
-                                               
+
                                                 <td>
                                                     <a href="course-edit" class="text-inherit">
                                                         <div class="d-flex align-items-center">
@@ -204,7 +204,7 @@
                                                         <h5 class="mb-0">Reva Yokk</h5>
                                                     </div>
                                                 </td>
-                                                
+
                                                 <td><span class="badge bg-success">Publish</span></td>
                                                 <td>12,877</td>
                                                 <td>
@@ -270,7 +270,7 @@
                                                         <h5 class="mb-0">Reva Yokk</h5>
                                                     </div>
                                                 </td>
-                                                
+
                                                 <td><span class="badge bg-danger">Unpublish</span></td>
 
                                                 <td>-</td>
@@ -338,9 +338,9 @@
                                                         <h5 class="mb-0">Reva Yokk</h5>
                                                     </div>
                                                 </td>
-                                                
+
                                                 <td><span class="badge bg-warning">Draft</span></td>
-                                                
+
                                                 <td>-</td>
 
                                                 <td>
@@ -405,7 +405,7 @@
                                                     <th>Status</th>
                                                     <th>Enrolled</th>
                                                     <th>Action</th>
-                                                     
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -439,7 +439,7 @@
                                                             <h5 class="mb-0">Reva Yokk</h5>
                                                         </div>
                                                     </td>
-                                                    
+
                                                     <td><span class="badge bg-success">Publish</span></td>
                                                     <td>12,877</td>
                                                     <td>
@@ -469,7 +469,7 @@
                                                                         <i class="fe fe-move dropdown-item-icon"></i>
                                                                         Move
                                                                     </a>
-    
+
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -505,10 +505,10 @@
                                                             <h5 class="mb-0">Reva Yokk</h5>
                                                         </div>
                                                     </td>
-                                                    
+
                                                     <td><span class="badge bg-success">Publish</span></td>
                                                     <td>545</td>
-    
+
                                                     <td>
                                                         <div class="hstack gap-3">
                                                             <!--   -->
@@ -536,13 +536,13 @@
                                                                         <i class="fe fe-move dropdown-item-icon"></i>
                                                                         Move
                                                                     </a>
-    
+
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </td>
                                                 </tr>
-    
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -569,7 +569,7 @@
                                                 <th>Status</th>
                                                 <th>Enrolled</th>
                                                 <th>Action</th>
-                                                 
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -603,7 +603,7 @@
                                                         <h5 class="mb-0">Reva Yokk</h5>
                                                     </div>
                                                 </td>
-                                                
+
                                                 <td><span class="badge bg-danger">Unpublish</span></td>
                                                 <td>-</td>
                                                 <td>
@@ -669,7 +669,7 @@
                                                         <h5 class="mb-0">Reva Yokk</h5>
                                                     </div>
                                                 </td>
-                                                
+
                                                 <td><span class="badge bg-danger">Unpublish</span></td>
                                                 <td>-</td>
 
@@ -733,7 +733,7 @@
                                                     <th>E-mentor</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
-                                                     
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -767,7 +767,7 @@
                                                             <h5 class="mb-0">Reva Yokk</h5>
                                                         </div>
                                                     </td>
-                                                    
+
                                                     <td> <span class="badge bg-warning">Draft</span></td>
                                                     <td>
                                                         <div class="hstack gap-3">
@@ -796,7 +796,7 @@
                                                                         <i class="fe fe-move dropdown-item-icon"></i>
                                                                         Move
                                                                     </a>
-    
+
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -832,10 +832,10 @@
                                                             <h5 class="mb-0">Reva Yokk</h5>
                                                         </div>
                                                     </td>
-                                                    
+
                                                     <td> <span class="badge bg-warning">Draft</span></td>
 
-    
+
                                                     <td>
                                                         <div class="hstack gap-3">
                                                             <!--   -->
@@ -863,13 +863,13 @@
                                                                         <i class="fe fe-move dropdown-item-icon"></i>
                                                                         Move
                                                                     </a>
-    
+
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </td>
                                                 </tr>
-    
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -881,7 +881,46 @@
                 </div>
             </div>
 
+<div class="modal fade" id="ScheduleMeeting" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskModalLabel">Schedule Meeting</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row ScheduleData" novalidate>
+                    <div class="mb-2 col-12">
+                        <label for="FirstName" class="form-label">Description <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="mb-2 col-6">
+                        <label for="LastName" class="form-label">Date<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="date" placeholder="date"  min="28-5-2025" name="date" required>
+                        <div class="invalid-feedback" id="last_name_error" >Please Date.</div>
+                    </div>
+                    <div class="mb-2 col-6">
+                        <label for="EmailId" class="form-label">Start Time <span class="text-danger">*</span></label>
+                        <input type="time" class="form-control" id="time" placeholder="time" name="time" required>
+                        <div class="invalid-feedback" id="email_error" >Please Time.</div>
 
+                    </div>
+                    <div class="mb-2 col-6">
+                        <label for="EmailId" class="form-label">End Time <span class="text-danger">*</span></label>
+                        <input type="time" class="form-control" id="endtime" placeholder="time" name="endtime" required>
+                        <div class="invalid-feedback" id="email_error" >Please Time.</div>
+
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end pt-2">
+                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary createSchedule" >Create Meeting</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     </section>
     </main>
     <script src="{{ asset('admin/js/export.js')}}"></script>
@@ -898,7 +937,7 @@
             $('.award_course_list tbody :checkbox').prop('checked', $(this).is(':checked'));
             e.stopImmediatePropagation();
         });
-       
+
         document.querySelectorAll(".form-check-input").forEach((checkbox) => {
             checkbox.addEventListener("change", function() {
                 var checkboxId = this.id; // Get the ID of the checkbox
@@ -1013,7 +1052,7 @@
             //                                 emt_lname;
             //                             var img = data.ementor.photo  ? baseUrl + 'storage/' + data.ementor.photo : baseUrl + "storage/ementorDocs/e-mentor-profile-photo.png";
             //                         }
-                                    
+
             //                         return (
             //                             "<div class='d-flex align-items-center'><img src='" +
             //                             img +
@@ -1067,20 +1106,20 @@
             //                             editUrl +
             //                             '" data-bs-toggle="tooltip" data-placement="top" title="Edit"><i class="fe fe-edit"></i></a>    <span class="dropdown dropstart"><a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false"><i class="fe fe-more-vertical"></i></a> <span class="dropdown-menu"><span class="dropdown-header">Settings</span>';
             //                             // <a href="javascript:void(0);"  class="deleteCourse" data-course_id="'+CourseId+'" data-bs-toggle="tooltip" data-placement="top" title="Delete" ><i class="fe fe-trash"></i></a>
-                                    
-                                       
-                                        
-            //                             if(row.status == '1'){ 
-            //                                 Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_publish')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Publish</a> </div>'; 
+
+
+
+            //                             if(row.status == '1'){
+            //                                 Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_publish')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Publish</a> </div>';
             //                             }else{
-            //                                 if(row.status == '3'){ 
+            //                                 if(row.status == '3'){
             //                                     Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_unpublish')+'" data-role="students" data-course_id="'+btoa(row.id)+'"><span class="badge-dot bg-danger me-1 d-inline-block align-middle"></span>Unpublish </a>';
-            //                                     Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>'; 
-            //                                 }else if(row.status == '2'){ 
+            //                                     Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>';
+            //                                 }else if(row.status == '2'){
             //                                     Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_publish')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Publish</a>';
-            //                                     Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>'; 
-            //                                 } 
-            //                             } 
+            //                                     Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>';
+            //                                 }
+            //                             }
             //                             return Action;
             //                     },
             //                     width:"10%"
@@ -1104,7 +1143,7 @@
                     "url": baseUrl + "admin/award-course-get-data/" + action,
                     "type": "GET"
                 },
-                "columns": 
+                "columns":
                 [
                         {
                             data: "null",
@@ -1175,7 +1214,7 @@
                                         emt_lname;
                                     var img = data.ementor.photo  ? baseUrl + 'storage/' + data.ementor.photo : baseUrl + "storage/ementorDocs/e-mentor-profile-photo.png";
                                 }
-                                
+
                                 return (
                                     "<div class='d-flex align-items-center'><img src='" +
                                     img +
@@ -1229,27 +1268,35 @@
                                     editUrl +
                                     '" data-bs-toggle="tooltip" data-placement="top" title="Edit"><i class="fe fe-edit"></i></a>    <span class="dropdown dropstart"><a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false"><i class="fe fe-more-vertical"></i></a> <span class="dropdown-menu"><span class="dropdown-header">Settings</span>';
                                     // <a href="javascript:void(0);"  class="deleteCourse" data-course_id="'+CourseId+'" data-bs-toggle="tooltip" data-placement="top" title="Delete" ><i class="fe fe-trash"></i></a>
-                                
-                                    
-                                    
-                                    if(row.status == '1'){ 
-                                        Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_publish')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Publish</a> </div>'; 
+
+
+
+                                    if(row.status == '1'){
+                                        Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_publish')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Publish</a> </div>';
                                     }else{
-                                        if(row.status == '3'){ 
+                                        if(row.status == '3'){
                                             Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_unpublish')+'" data-role="students" data-course_id="'+btoa(row.id)+'"><span class="badge-dot bg-danger me-1 d-inline-block align-middle"></span>Unpublish </a>';
-                                            Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>'; 
-                                        }else if(row.status == '2'){ 
+                                            Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>';
+                                        }else if(row.status == '2'){
                                             Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_publish')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Publish</a>';
-                                            Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>'; 
-                                        } 
-                                    } 
+                                            Action += '<a class="dropdown-item statusCourse" href="#" data-status="'+btoa('course_status_draft')+'" data-role="students" data-course_id="'+btoa(row.id)+'" >  <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>Draft</a> </div>';
+                                        }
+                                    }
                                     return Action;
                             },
                             width:"10%"
                         },
+                        {
+                            data: null,
+                            render: function(data) {
+                                   var CourseId = btoa(data.id);
+                                return '<button class="btn btn-primary openScheduleModal" data-bs-toggle="modal" data-course-id='+ CourseId +' data-bs-target="#ScheduleMeeting">Schedule</button>';
+                            },
+                            width:"5%"
+                        }
                             // Add more columns as needed
                 ],
-                                        
+
             });
             table.on('draw', function () {
                 var PageInfo = table.page.info();
@@ -1302,5 +1349,12 @@
             });
         }
 
+
+        //Meeting link
+        $(document).on("click", ".openScheduleModal", function () {
+            var courseId = $(this).data("course-id");
+            // Store it in a hidden field or modal attribute
+            $("#ScheduleMeeting").data("course-id", courseId);
+        });
     </script>
 @endsection
