@@ -48,12 +48,12 @@
                                     {{-- @endif --}}
                                     
                                     <!-- Nav item -->
-                                       <li class="nav-item sp-5">
+                                       {{-- <li class="nav-item sp-5">
                                         <a class="nav-link" href="{{route('student-invoice')}}">
                                             <i class="bi bi-currency-euro nav-icon"></i>
                                             Invoice
                                         </a>
-                                    </li>
+                                    </li> --}}
                                  
                                     {{-- <li class="nav-item sp-8">
                                         <a class="nav-link " href="{{route('student-about-me')}}">

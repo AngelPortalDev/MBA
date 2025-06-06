@@ -873,6 +873,47 @@ $(document).ready(function () {
                 });
         });
     });
+
+    
+    
+    $("#CoursePurchaseSubmit").on("click", function (event) {
+        event.preventDefault(); //
+        var student_id = $(".student_id").val();
+        var course_id = $(".course_id").val();
+
+        $.ajax({
+            url: baseUrl + "/admin/student-course-purchase",
+            type: "post",
+            data: {
+                'student_id':student_id,
+                'course_id':course_id
+            },
+            dataType: "json",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            success: function (response) {
+
+                console.log(response);
+                $('#optionalCourseModal').modal('hide');
+                $("#processingLoader").fadeOut();
+                if (response.code === 200 || response.code === 201) {
+                    $(".errors").remove();
+                    const modalData = {
+                        title: response.title,
+                        message: response.message || '',
+                        icon: response.icon,
+                    }
+                    showModal(modalData);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
+            }
+        });
+
+
+    });
     // });
 });
 // Update My Profile info

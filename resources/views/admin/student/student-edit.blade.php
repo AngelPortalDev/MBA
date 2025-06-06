@@ -150,20 +150,20 @@
                         </li> --}}
                         <li class="nav-item ms-0" role="presentation">
                             <a class="nav-link" id="purchased-courses-tab" data-bs-toggle="pill" href="#purchased-courses"
-                                role="tab" aria-controls="purchased-courses" aria-selected="false" tabindex="-1">Purchased Courses</a>
+                                role="tab" aria-controls="purchased-courses" aria-selected="false" tabindex="-1">Assinged Courses</a>
                         </li>
 
-                        <li class="nav-item" role="presentation">
+                        {{-- <li class="nav-item" role="presentation">
                             <a class="nav-link " id="wishlist-tab" data-bs-toggle="pill" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="true">
                                 Wishlist
                             </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
+                        </li> --}}
+                        {{-- <li class="nav-item" role="presentation">
                             <a class="nav-link " id="expired-courses-tab" data-bs-toggle="pill" href="#expired-courses"
                                 role="tab" aria-controls="expired-courses" aria-selected="true">
                                 Expired Courses
                             </a>
-                        </li>
+                        </li> --}}
                        
                         {{-- <li class="nav-item" role="presentation">
                             <a class="nav-link" id="exam-tab" data-bs-toggle="pill" href="#exam" role="tab" aria-controls="exam" aria-selected="true">

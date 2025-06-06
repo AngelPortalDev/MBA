@@ -367,11 +367,11 @@ class StudentAdminController extends Controller
                             $course->scmId
                         );
         
-                        $examResults[$course->scmId] = $examResult;
-                        $statusInfo[$course->scmId] = getCourseStatus($course);
+                        // $examResults[$course->scmId] = $examResult;
+                        // $statusInfo[$course->scmId] = getCourseStatus($course);
                     }
-                    $user->examResults = $examResults;
-                    $user->statusInfo = $statusInfo;
+                    // $user->examResults = $examResults;
+                    // $user->statusInfo = $statusInfo;
 
                 }
             }
@@ -1477,5 +1477,80 @@ class StudentAdminController extends Controller
             return json_encode(['code' => 202, 'title' => 'Something Went Wrong', 'message' => 'Something Went Wrong.', "icon" => generateIconPath("error")]);
         }
     }
+
+
+    public function StudentCoursePurchase(Request $req){
+
+        if ($req->isMethod('POST') && $req->ajax() && Auth::check()) {
+            $student_id = isset($req->student_id) ? base64_decode($req->student_id) : '';
+            $course_id = isset($req->course_id) ? base64_decode($req->course_id) : '';
+            $CoursesData = getData('course_master',['ementor_id','course_title','duration_month'],['id'=>$course_id]);
+
+            $select = [
+                'course_id' => $course_id,
+                'user_id' => $student_id,
+                'instructor_id' => $CoursesData[0]->ementor_id,
+                'course_title' => $CoursesData[0]->course_title,
+                'created_at' =>  $this->time,
+                'created_by' =>  auth()->user()->id,
+                'status'=>'0'
+            ];
+            $updateOrder = processData(['orders', 'id'], $select, []);
+            if (isset($updateOrder) && !is_array($updateOrder) && $updateOrder === FALSE) {
+                return json_encode(['code' => 201, 'title' => "Unable to Course Purchase", 'message' => 'Something Went Wrong. Please Try Again...', "icon" => generateIconPath("error")]);
+            }
+            $User = getData('users',['name','last_name','email'],['id'=>$student_id]);
+            $uniq_payment_id = rand();
+            $uniq_order_id = rand();
+            $select = [
+                'user_id' => $student_id,
+                'first_name' => $User[0]->name,
+                'last_name' => $User[0]->last_name,
+                'email' => $User[0]->email,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id,
+                'created_at' => $this->time,
+                'uni_payment_id' => $uniq_payment_id,
+                'uni_order_id' => $uniq_order_id,
+                'payment_status'=>'0',
+                'status'=>'0'
+            ];
+            $paymentData = processData(['payments', 'id'], $select, []);
+            if (isset($paymentData) && !is_array($paymentData) && $paymentData === FALSE) {
+                return json_encode(['code' => 201, 'title' => "Unable to Course Purchase", 'message' => 'Something Went Wrong. Please Try Again...', "icon" => generateIconPath("error")]);
+            }
+            $where = ['id' =>  $updateOrder['id']];
+            $select = [
+                'payment_id' => $paymentData['id'],
+            ];
+            $updateOrder = processData(['orders', 'id'], $select, $where);
+
+
+            $select = [
+                'user_id' => $student_id,
+                'course_id' => $course_id,
+                'payment_id'=>  $paymentData['id'],
+                'purchased_on' => $this->time,
+                'created_by' => auth()->user()->id,
+                'created_at' => $this->time,
+                'course_start_date' => now()->format('Y-m-d'),
+                'course_expired_on' => Carbon::now()->addMonths($CoursesData[0]->duration_month)->format('Y-m-d')
+            ];
+            $courseMasterData = processData(['student_course_master', 'id'], $select, []);
+
+
+            if (isset($courseMasterData) && $courseMasterData['status'] == 'TRUE') {
+
+                return json_encode(['code' => 200, 'title' => "Course Assigned", 'message' => 'Course Assigned', "icon" => generateIconPath("success")]);
+
+            }else{
+                return json_encode(['code' => 201, 'title' => "Unable to Course Purchase", 'message' => 'Something Went Wrong. Please Try Again...', "icon" => generateIconPath("error")]);
+
+            }
+        } else {
+            return json_encode(['code' => 202, 'title' => 'Something Went Wrong', 'message' => 'Something Went Wrong.', "icon" => generateIconPath("error")]);
+        }
+    }
+    
 }
 

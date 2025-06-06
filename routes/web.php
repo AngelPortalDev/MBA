@@ -726,6 +726,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'roles:admin']], fun
         Route::get('studentreports', 'studentReport')->name('admin.exam.student-report');
         Route::get('/students-report-data', 'StudentReportList')->name('admin.studentList');
         Route::post('/student-research-doc-verify', 'ResearchDocVerify');
+        Route::post('/student-course-purchase', 'StudentCoursePurchase');
     });
     Route::controller(TeacherAdminController::class)->group(function () {
         Route::post('/teacher-create', 'createTeacher');

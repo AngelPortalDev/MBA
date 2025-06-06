@@ -82,7 +82,7 @@ if (!function_exists('getPaidCourse')) {
 
             $userId = $where['user_id'] ? $where['user_id'] : 0;
 
-            $adjustedExpiryCondition = "IF(scm.exam_attempt_remain = 1, DATE_ADD(scm.course_expired_on, INTERVAL 15 DAY), scm.course_expired_on)";
+            // $adjustedExpiryCondition = "IF(scm.exam_attempt_remain = 1, DATE_ADD(scm.course_expired_on, INTERVAL 15 DAY), scm.course_expired_on)";
 
             $query = DB::table('course_master as cm')
                 ->select(
@@ -98,9 +98,9 @@ if (!function_exists('getPaidCourse')) {
                     'cm.ects',
                     'scm.course_progress',
                     'scm.id as scmId',
-                    'scm.preference_status',
-                    'scm.preference_id',
-                    DB::raw("$adjustedExpiryCondition as adjusted_expiry")
+                    // 'scm.preference_status',
+                    // 'scm.preference_id',
+                    // DB::raw("$adjustedExpiryCondition as adjusted_expiry")
                 )
                 ->leftJoin('orders as ord', 'ord.course_id', '=', 'cm.id')
                 ->leftJoin('users as user', 'ord.user_id', '=', 'user.id')
@@ -114,22 +114,22 @@ if (!function_exists('getPaidCourse')) {
                     $ementorId = $where['ementor_id'] ? $where['ementor_id'] : 0;
                     $query->where('cm.ementor_id', $ementorId);
                 }
-                if (isset($where['include_adjusted_expiry']) && $where['include_adjusted_expiry'] === true) {
-                    $query->whereRaw("$adjustedExpiryCondition > NOW()");
-                } else {
+                // if (isset($where['include_adjusted_expiry']) && $where['include_adjusted_expiry'] === true) {
+                //     $query->whereRaw("$adjustedExpiryCondition > NOW()");
+                // } else {
                     $query->where('scm.course_expired_on', '>', now());
-                }
+                // }
                 
-                $query = $query->where('ord.status', '0')->where('cm.category_id','!=','5')
+                $query = $query->where('ord.status', '0')
                 ->whereNotNull('ord.course_id')
-                ->where(function ($query) {
-                    $query->where('scm.exam_remark', '!=', '1')
-                        ->orWhereNull('scm.exam_remark');
-                })
-                ->where(function ($query) {
-                    $query->where('scm.exam_attempt_remain', '!=', 0)
-                        ->orWhere('scm.exam_attempt_remain', '>', 0);
-                })
+                // ->where(function ($query) {
+                //     $query->where('scm.exam_remark', '!=', '1')
+                //         ->orWhereNull('scm.exam_remark');
+                // })
+                // ->where(function ($query) {
+                //     $query->where('scm.exam_attempt_remain', '!=', 0)
+                //         ->orWhere('scm.exam_attempt_remain', '>', 0);
+                // })
                 ->whereIn('ord.id', function ($subquery) use ($userId) {
                     $subquery->select(DB::raw('MAX(ord.id)'))
                         ->from('orders as ord')
@@ -150,7 +150,7 @@ if (!function_exists('getAllPaidCourse')) {
 
             $userId = $where['user_id'] ? $where['user_id'] : 0;
             
-            $adjustedExpiryCondition = "IF(scm.exam_attempt_remain = 1, DATE_ADD(scm.course_expired_on, INTERVAL 15 DAY), scm.course_expired_on)";
+            // $adjustedExpiryCondition = "IF(scm.exam_attempt_remain = 1, DATE_ADD(scm.course_expired_on, INTERVAL 15 DAY), scm.course_expired_on)";
 
             $query = DB::table('course_master as cm')
                 ->select(
@@ -167,8 +167,8 @@ if (!function_exists('getAllPaidCourse')) {
                     'scm.course_progress',
                     'scm.id as scmId',
                     'scm.course_start_date',
-                    'payments.total_amount as purchase_price',
-                    DB::raw("$adjustedExpiryCondition as adjusted_expiry")
+                    // 'payments.total_amount as purchase_price',
+                    // DB::raw("$adjustedExpiryCondition as adjusted_expiry")
                 )
                 ->leftJoin('orders as ord', 'ord.course_id', '=', 'cm.id')
                 ->leftJoin('users as user', 'ord.user_id', '=', 'user.id')
