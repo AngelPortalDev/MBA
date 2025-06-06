@@ -754,50 +754,7 @@ $(document).ready(function() {
   <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq4605044396440f1b620acf7e7aff45cb7c1758c52af8a5fac9b184144a95f114" defer></script>
 @endif --}}
 {{-- @if(Route::current()->getName() == 'english-test' || Route::current()->getName() == 'checkout') --}}
-@if(Route::current()->getName() == 'receipt')
-@else
-<script>
-  var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?67589';
-  var s = document.createElement('script');
-  s.type = 'text/javascript';
-  s.async = true;
-  s.src = url;
-  var options = {
-  "enabled":true,
-  "chatButtonSetting":{
-      "backgroundColor":"#00e785",
-      "ctaText":"Chat with us",
-      "borderRadius":"25",
-      "marginLeft": "0",
-      "marginRight": "20",
-      "marginBottom": "20",
-      "ctaIconWATI":false,
-      "position":"right"
-  },
-  "brandSetting":{
-      "brandName":"E Ascencia",
-      "brandSubTitle":"undefined",
-      "brandImg":"https://www.eascencia.mt/frontend/images/brand/logo/logo.svg",
-      "welcomeText":"Hi there!\nHow can I help you?",
-      "messageText":"",
-      "backgroundColor":"#00e785",
-      "ctaText":"Chat with us",
-      "borderRadius":"25",
-      "autoShow":false,
-      "phoneNumber":"35699389272"
-  }
-  };
-  s.onload = function() {
-      CreateWhatsappChatWidget(options);
-  };
-  var x = document.getElementsByTagName('script')[0];
-  x.parentNode.insertBefore(s, x);
 
-
-  
-</script>
-  {{-- <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq4605044396440f1b620acf7e7aff45cb7c1758c52af8a5fac9b184144a95f114" defer></script> --}}
-@endif
 
 <script>
    $('.search-input').on('input', function () {

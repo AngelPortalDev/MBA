@@ -55,14 +55,14 @@
                     <!-- Side Navbar -->
                     <ul class="nav nav-lb-tab mb-6" id="tab" role="tablist">
                         <li class="nav-item ms-0" role="presentation">
-                            <a class="nav-link active" id="purchased-courses-tab" data-bs-toggle="pill" href="#purchased-courses" role="tab" aria-controls="purchased-courses" aria-selected="false" tabindex="-1">Purchased Courses</a>
+                            <a class="nav-link active" id="purchased-courses-tab" data-bs-toggle="pill" href="#purchased-courses" role="tab" aria-controls="purchased-courses" aria-selected="false" tabindex="-1">Assigned Courses</a>
                         </li>
                         {{-- <li class="nav-item" role="presentation">
                             <a class="nav-link " id="shopping-cart-tab" data-bs-toggle="pill" href="#shopping-cart" role="tab" aria-controls="shopping-cart" aria-selected="true">
                                 My Cart
                             </a>
                         </li> --}}
-                        <li class="nav-item" role="presentation">
+                        {{-- <li class="nav-item" role="presentation">
                             <a class="nav-link " id="wishlist-tab" data-bs-toggle="pill" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="true">
                                 Wishlist
                             </a>
@@ -76,7 +76,7 @@
                             <a class="nav-link " id="certificate-tab" data-bs-toggle="pill" href="#certificate" role="tab" aria-controls="certificate" aria-selected="true">
                                 Certificate
                             </a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                     <!-- Tab content -->
@@ -104,6 +104,7 @@
                                         'include_adjusted_expiry' => false
                                     ];
                                     $studentRecords = getPaidCourse($where); 
+                                    
                                 @endphp
                                 @if(!empty($studentRecords))
                                     @php 
@@ -315,8 +316,8 @@
                                     <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-2 mb-3">
                                         <div class="d-flex flex-column align-items-center">
                                             <img src="{{ asset('frontend/images/icon/purchase_course.svg')}}" alt="not found" style="height: 160px; width: 160px">
-                                            <h3 class="mt-3">Purchase Course</h3>
-                                            <p>Unfortunately, There is no purchase course. Check out our latest offerings!</p>
+                                            <h3 class="mt-3">Assigned Course</h3>
+                                            <p>Unfortunately, There is no assigned course. Check out our latest offerings!</p>
                                             <a href="{{ route('index', ['scroll' => 'true']) }}" width="20;" class="btn btn-primary">Start Learning</a>
                                         </div>
                                     </div>

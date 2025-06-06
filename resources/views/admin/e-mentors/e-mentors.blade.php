@@ -698,7 +698,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="taskModalLabel">Create New E-mentor</h5>
+                <h5 class="modal-title" id="taskModalLabel">Create New Lecturer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -752,7 +752,7 @@
                     </div>
                     <div class="col-12 d-flex justify-content-end pt-2">
                         <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary createEmentor" >Create E-mentor</button>
+                        <button type="submit" class="btn btn-primary createEmentor" >Create Lecturer</button>
                     </div>
                 </form>
             </div>
