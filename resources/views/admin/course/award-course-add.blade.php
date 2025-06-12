@@ -140,7 +140,7 @@ input[type=number] {
                         <div class="step" data-target="#course-content-4">
                             <button type="button" class="step-trigger" role="tab" id="courseFormtrigger4"
                                 aria-controls="course-content-4">
-                                <span class="bs-stepper-circle">4</span>
+                                <span class="bs-stepper-circle">3</span>
                                 <span class="bs-stepper-label" >Course Content </span>
                             </button>
                         </div>
@@ -189,6 +189,14 @@ input[type=number] {
                                                     Total Modules</div>
                                             </div>
 
+                                            {{-- <div class="mb-3 col-md-12">
+                                                <label class="form-label">Select DBA Module </label>
+                                                <select class="form-select" name="award_dba" id="award_dba">
+                                                    <option value="">Select</option>
+                                                    <option value="award_dba_module" @if ($CourseData[0]['award_dba'] == 'award_dba_module')  selected @endif>Award DBA</option>
+                                                </select> 
+                                                <div class="invalid-feedback" id="award_dba_error">Select course category</div>
+                                            </div> --}}
                                             <div class="mb-3 col-md-6">
                                                 <label for="mqf" class="form-label"> MQF/EQF Level</label>
                                                 <input id="mqf" class="form-control"
@@ -276,7 +284,7 @@ input[type=number] {
                                                     Certificate</div>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label">Select E-mentor</label>
+                                                <label class="form-label">Select Lecturer</label>
                                                 <select class="form-select" name="ementor_id" id="ementor_id">
                                                 <option value="">Select</option>  
 
@@ -289,7 +297,7 @@ input[type=number] {
                                                     @endif
                                                 @endforeach
                                                 </select>
-                                                <div class="invalid-feedback" id="ementor_id_error">Select E-mentor
+                                                <div class="invalid-feedback" id="ementor_id_error">Select Lecturer
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -299,7 +307,7 @@ input[type=number] {
                                                     name="course_cuttoff_perc" type="number" placeholder="Course cut off percentage">
                                                 <div class="invalid-feedback" id="course_cuttoff_perc_error">Please enter cut off percentage.</div>
                                             </div>
-                                            <div class="mb-3 col-md-12">
+                                            {{-- <div class="mb-3 col-md-12">
                                                 <label class="form-label">Select Lecturer</label>
                                                 @php
                                                     $lecture_id =isset($CourseData[0]['lecturer_id']) ? $CourseData[0]['lecturer_id'] :'';
@@ -318,9 +326,9 @@ input[type=number] {
                                                     @endforeach
                                                 </select>
                                                 <div class="invalid-feedback" id="lecturer_id_error">Please Select
-                                                    Lecturer</div>
+                                                    Lecturer</div> --}}
                                                 {{-- <a href="#" class="btn btn-outline-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#addLecturerModal">Add Lecturer +</a> --}}
-                                            </div>
+                                            {{-- </div> --}}
                                             <div class="mb-3 col-md-12">
                                                 <label for="toggleDiscordLinks" class="form-label">Show Discord Links</label>
                                                 <input type="checkbox" id="toggleDiscordLinks" onclick="toggleDiscordFields()" {{ isset($CourseData[0]['other_detail']) &&$CourseData[0]['other_detail']['discord_channel_link'] != null ? 'checked' : '' }}>
@@ -494,8 +502,8 @@ input[type=number] {
                                                     class="form-control w-100 course_overview" style="height: 200px" value="{{ !empty($CourseData[0]['overview']) ? ($CourseData[0]['overview']) : '' }}">
                                                     <?php echo !empty($CourseData[0]['overview']) ? htmlspecialchars_decode($CourseData[0]['overview']) : '' ?>
                                                 </div>
-                                                <small>Enter course overview up to 1500 characters.</small>
-                                                <div class="invalid-feedback" id="course_overview_error">Enter course overview up to 1500 characters.</div>
+                                                <small>Enter course overview up to 2100 characters.</small>
+                                                <div class="invalid-feedback" id="course_overview_error">Enter course overview up to 2100 characters.</div>
                                             </div>
 
                                             <div class="mb-3">
@@ -504,9 +512,9 @@ input[type=number] {
                                                     class="form-control w-100" style="height: 200px">
                                                     <?php echo !empty($CourseData[0]['programme_outcomes']) ? htmlspecialchars_decode($CourseData[0]['programme_outcomes']) : '' ?>
                                                 </div>
-                                                <small>Enter programme outcomes up to 1500 characters.</small>
+                                                <small>Enter programme outcomes up to 1800 characters.</small>
                                                 <div class="invalid-feedback" id="programme_outcomes_error">Please
-                                                    Enter programme outcomes up to 1500 characters.</div>
+                                                    Enter programme outcomes up to 1800 characters.</div>
                                             </div>
                                             <div class="mb-3 col-md-12">
                                                 <label for="entry_requirements_error" class="form-label">Entry
@@ -519,10 +527,10 @@ input[type=number] {
                                                     class="form-control w-100" style="height: 200px">
                                                     <?php echo  !empty($CourseData[0]['entry_requirements']) ? htmlspecialchars_decode($CourseData[0]['entry_requirements']) : '' ?>
                                                 </div>
-                                                <small> Enter entry requirement up to 1500 characters.</small>
+                                                <small> Enter entry requirement up to 1800 characters.</small>
 
                                                 <div class="invalid-feedback" id="entry_requirements_error">Please
-                                                    Entry Requirement must be between upto 1500 characters.</div>
+                                                    Enter Entry Requirement up to 1800 characters.</div>
                                             </div>
                                             <div class="mb-3 col-md-12">
                                                 <label for="assessment" class="form-label">Assessment</label>
@@ -551,132 +559,7 @@ input[type=number] {
                         </div>
 
                         <!-- Course Media -->
-                        <div id="section-selection-3" role="tabpanel" class="bs-stepper-pane fade"
-                            aria-labelledby="courseFormtrigger3">
-                            <!-- Card -->
-                          
-                                    <div class="card mb-3 border-0 px-3">
-                                        <div
-                                            class="card-header border-bottom py-3 mb-4 d-flex justify-content-between px-1 align-items-center">
-                                            <div>
-                                                <h3 class="mb-0">Section Selection</h3>
-                                                <span class="fs-4">Select Sections to Build Your Course </span>
-                                            </div>
-
-                                            <!-- <div><a href="#" class="btn btn-outline-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#add-section">Add Section +</a></div> -->
-
-                                        </div>
-
-                                        <!-- Card body -->
-
-                                        <!-- row -->
-                                        <div class="row align-items-center justify-content-center">
-                                            <div class="col-lg-8 col-12">
-                                                <div>
-                                                    <div class="mt-2">
-                                                    <!-- card -->
-                                                        <div
-                                                            class="bg-white rounded-md-pill shadow rounded-3 mb-2  search-add-award-course">
-                                                            <!-- card body -->
-                                                            <div class="p-md-2 p-4 border-1 border-light-subtle">
-                                                                <!-- form -->
-                                                                <div class="row g-1">
-                                                                    <div class="col-12 col-md-12">
-                                                                        <!-- input -->
-                                                                        <div
-                                                                            class="input-group mb-2 mb-md-0 border-md-0 border rounded-pill">
-                                                                            <!-- input group -->
-                                                                            <div class="search-container">
-                                                                                <input type="text" id="search" class="form-control rounded-pill border-0 ps-3 form-focus-none w-100 "
-                                                                                    placeholder="Search and select section from here" aria-describedby="searchSection" aria-label="Section" style="padding-right: 1.5rem;"/>
-                                                                                <i class="bi bi-search" id="searchSection" ></i>
-                                                                                <i class="bi bi-x-lg clear-button" style="margin-top: 10px"></i>
-                                                                                {{-- <i class="bi bi-x" id="clear-btn" style="display: none;"></i> --}}
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                
-                                                        <ul class="search_list list-group d-none"
-                                                            style="">
-
-                                                        </ul>
-                                                        <!-- text -->
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="card-header mb-3 px-1">
-                                            <h4 class="mb-0">Choose Order</h4>
-                                            <p class="mb-0">Arrange Your Course Sections with Drag and Drop</p>
-
-                                        </div>
-
-                                        <form class="CourseMediaForm">
-                                            <input type="hidden"
-                                                value="{{ isset($CourseData[0]['id']) ? base64_encode($CourseData[0]['id']) : '' }}"
-                                                name="course_id" class="course_id">
-
-                                                    <div class="bg-light rounded p-2 mb-4">
-
-                                                        <div class="list-group list-group-flush border-top-0" id="courseList">
-
-                                                            <div id="courseOne">
-                                                            
-                                                        @if (isset($CourseData))   
-                                                            
-                                                                @foreach($CourseData[0]['course_manage'] as $section)
-                                                                @foreach($section['sections'] as $section)
-                                                                    @if (isset($section['id']))
-                                                                        <div class='list-group-item rounded px-3 text-nowrap mb-1' id="sectionID">
-                                                                            <input type='hidden' name='section_id[]' value="{{ isset($section['id']) ? base64_encode($section['id']) : 0}}">
-                                                                            <div class='d-flex align-items-center justify-content-between'>
-                                                                                <div>
-                                                                                    <h5 class='mb-0 text-truncate'><a href='#'
-                                                                                        class='text-inherit'><span class='align-middle fs-4 text-wrap-title'>
-                                                                                            <i class='fe fe-menu me-1 align-middle'></i>
-                                                                                            @php $action = base64_encode("edit");
-                                                                                                 $courseId =isset($section['id']) ? base64_encode($section['id']) : '' 
-                                                                                             @endphp
-                                                                                            <a href="{{ url('admin/section-content-get/' . $courseId . '/' . $action) }}">
-                                                                                                {!! htmlspecialchars_decode($section['section_name']) !!}
-                                                                                            </a>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <a href='javascript:void(0)'  onclick="removeSection(this);"  class='me-1 text-inherit' data-bs-toggle='tooltip' data-placement='top'
-                                                                                        aria-label='Delete' data-bs-original-title='Delete'><i
-                                                                                            class='fe fe-trash-2 fs-6'></i></a>
-                                                                                </div>       
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
-                                                                    @endforeach
-                                                                @endforeach
-                                                                @endif
-                                                            </div>
-
-                                                        
-                                                        </div>
-
-                                                    </div>
-                                                     <!-- Button -->
-                                            <div class="d-flex justify-content-between">
-                                                <button class="btn btn-secondary previousOtherForm">Previous</button>
-                                                <button type="button" class="btn btn-primary" id="updateSectionAssigned">
-                                                    Save & Next</button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                               
-
-                        </div>
+                      
 
                         <!-- Course Content -->
                         <div id="course-content-4" role="tabpanel" class="bs-stepper-pane fade"
