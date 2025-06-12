@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Log,Validator};
+use Illuminate\Support\Facades\{Log,Validator,DB};
 use Stripe\Webhook;
 use App\Services\GoogleCalendarService;
 use Carbon\Carbon;
@@ -89,14 +89,31 @@ class WebhookController extends Controller
         $end = Carbon::parse("{$request->date} {$request->endtime}",'Europe/Malta');
         $course= base64_decode($request->course_id);
 
-        // $useremail = CourseModule::where('id',$course)->with('Ementor')->get();
+        $StudentCourseMaster = DB::table('student_course_master')
+        ->where('course_id',$course)
+        ->leftJoin('users','users.id','=','student_course_master.user_id')
+        ->pluck('users.email')   // directly get email array
+        ->toArray();
+
+        // Convert array to comma separated string
+        $emailString = implode(',', $StudentCourseMaster);
+
+        // Get mentor email
+        $useremail = CourseModule::where('id', $course)->with('Ementor')->first();
+        $mentorEmail = $useremail->Ementor->email ?? '';
+
+        // Prepare attendee email list (both mentor and students)
+        $attendeeEmails = $mentorEmail;
+        if (!empty($emailString)) {
+            $attendeeEmails .= ',' . $emailString;
+        }
         // dd($useremail[0]['Ementor']['email']);
         $eventData = [
             'summary' => $request->name,
             'description' => 'Meeting scheduled via web form',
             'start' => $start,
             'end' => $end,
-            'attendee_email' => 'ankita@angel-portal.com',
+            'attendee_email' => $attendeeEmails,
         ];
 
         $meetLink = $calendarService->createGoogleMeetEvent($eventData);

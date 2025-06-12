@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <!-- Side Navbar -->
+                    <!-- Side Navbar -->           
                     <ul class="nav nav-lb-tab mb-6" id="tab" role="tablist">
                         <li class="nav-item ms-0" role="presentation">
                             <a class="nav-link active" id="purchased-courses-tab" data-bs-toggle="pill" href="#purchased-courses" role="tab" aria-controls="purchased-courses" aria-selected="false" tabindex="-1">Assigned Courses</a>
@@ -104,10 +104,9 @@
                                         'include_adjusted_expiry' => false
                                     ];
                                     $studentRecords = getPaidCourse($where); 
-                                    
                                 @endphp
                                 @if(!empty($studentRecords))
-                                    @php 
+                                    {{-- @php 
                                         $doc_verified = getData('student_doc_verification',['english_score','identity_is_approved','edu_is_approved','identity_doc_file','edu_doc_file','resume_file','edu_trail_attempt','identity_trail_attempt','english_test_attempt'],['student_id'=>Auth::user()->id]);
                                     @endphp
                                         @if($doc_verified[0]->identity_is_approved == "Approved" && $doc_verified[0]->edu_is_approved == "Approved" && $doc_verified[0]->resume_file != ''  && $doc_verified[0]->english_score >= 10)
@@ -122,42 +121,26 @@
                                             @php $DocumentVerified = ""; @endphp
                                         @else
                                             @php $DocumentVerified = "NotVerified"; @endphp
-                                        @endif
+                                        @endif --}}
                                     @foreach($studentRecords  as $key =>  $value)
-                                        @php $existOptionalCourse = 
+
+
+                                        @php 
+                                        $existOptionalCourse = 
                                             getData('master_course_management',['optional_course_id'],['award_id'=>$value->course_id,['optional_course_id','!=',''],'is_deleted'=>'No'],'','','asc');
                                         @endphp
                                         <div class="col-lg-3 col-md-6 col-12 my-2">
                                             <!-- Card -->
                                             <div class="card card-hover">
-                                                    @php $STYLE = ''; @endphp
-                                                    @if (count($existOptionalCourse) > 0 && $value->preference_status == '1')
-                                                            @php $STYLE="pointer-events: none !important;";  @endphp
-                                                    @endif
-                                                @if($value->exam_attempt_remain == '1' &&  $value->exam_remark == '0')
-                                                    @if($value->category_id == '1')
-                                                        @php $LINK = route('start-course-panel',['course_id'=>base64_encode($value->course_id)]); @endphp
-                                                    @else
-                                                        @php $LINK = route('master-course-panel',['course_id'=>base64_encode($value->course_id)]); @endphp
-                                                    @endif
-                                                    
-                                                    <a target="_blank" href="{{$LINK}}" style="{{ $STYLE }}" class="text-inherit" ><img  src="{{ Storage::url($value->course_thumbnail_file) }}" alt="course" class="card-img-top img-fluid" max-height='10px' style="object-fit: cover;" ></a>
-                                                    
-                                                @elseif($value->exam_attempt_remain == '2')
-                                                    @if($value->category_id == '1')
-                                                        @php $LINK = route('start-course-panel',['course_id'=>base64_encode($value->course_id)]); @endphp
-                                                    @else
-                                                        @php $LINK = route('master-course-panel',['course_id'=>base64_encode($value->course_id)]); @endphp
-                                                    @endif
-                                                    <a target="_blank" href="{{$LINK}}}}" style="{{ $STYLE }}" class="text-inherit" ><img
-                                                        src="{{ Storage::url($value->course_thumbnail_file) }}"
-                                                        alt="course" class="card-img-top img-fluid" max-height='10px' style="object-fit: cover;"></a>
-                                                @else
-                                                    <img src="{{ Storage::url($value->course_thumbnail_file) }}"
-                                                    alt="course" class="card-img-top img-fluid" max-height='10px' style="object-fit: cover;">
-                                                    @php $LINK = "#"; $STYLE="pointer-events: none !important;"; @endphp
-
-                                                @endif
+                                             
+                                                <img src="{{ Storage::url($value->podcast_thumbnail_file) }}" 
+                                                        alt="Trailer Thumbnail" 
+                                                        style="width: 100%; height: 100%; object-fit: cover;"  
+                                                        class="openVideoModal"
+                                                        {{-- data-video-url="{{ Storage::url($value->bn_video_url_id) }}" --}}
+                                                        data-video-url ="https://iframe.mediadelivery.net/embed/{{env('AWARD_LIBRARY_ID')}}/{{ $value->bn_video_url_id }}?autoplay=true" 
+                                                        
+                                                        />
 
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -167,18 +150,18 @@
                                                         @elseif($value->category_id == '3') @php  $catgeory_name = "Diploma"; @endphp
                                                         @elseif($value->category_id == '4') @php  $catgeory_name = "Master"; @endphp
                                                         @endif
-                                                        <span class="badge bg-info-soft co-category">{{$catgeory_name}}</span>
-                                                        <span class="badge bg-success-soft co-etcs">{{$value->ects}} ECTS</span>
+                                                        {{-- <span class="badge bg-info-soft co-category">{{$catgeory_name}}</span> --}}
+                                                        {{-- <span class="badge bg-success-soft co-etcs">{{$value->ects}} ECTS</span> --}}
                                                     </div>
                                                     <h4 class="mb-2 text-truncate-line-2 course-title">
-                                                            <a target="_blank" href="{{$LINK}}" style="{{ $STYLE }}" class="text-inherit">{{htmlspecialchars_decode($value->course_title)}}</a>
-                                                            @if($value->course_expired_on != '')
+                                                            <a target="_blank" class="text-inherit">{{htmlspecialchars_decode($value->course_title)}}</a>
+                                                            {{-- @if($value->course_expired_on != '')
                                                             <h5 class="badge mt-2" style="background: #dae138; color: #2b3990"> 
                                                             {{isset($value->course_expired_on) ? 'Access until '.\Carbon\Carbon::parse($value->course_expired_on)->format('d-m-y') : ''}}.</h5>
-                                                            @endif
+                                                            @endif --}}
 
                                                     </h4>
-                                                    <div class="mt-3">
+                                                    {{-- <div class="mt-3">
 
                                                         <div class="progress" style="height: 6px">
 
@@ -189,7 +172,7 @@
                                                         <small>{{isset($value->course_progress) ? $value->course_progress : 0}} % Completed</small>
 
                                                     </div>
-                                                  
+                                                   --}}
                                                     @if(count($existOptionalCourse) > 0 && $value->preference_id == '') 
                                                         <button class="optionalCourseAdd link-button" id="optionalCourseAdd" data-master_course_id="{{base64_encode($value->course_id)}}"
                                                             data-master_course_ects="{{base64_encode($value->ects)}}" data-student_course_master_id={{base64_encode($value->scmId)}}>Select Your Optional ECTS</button>
@@ -316,8 +299,8 @@
                                     <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center mt-2 mb-3">
                                         <div class="d-flex flex-column align-items-center">
                                             <img src="{{ asset('frontend/images/icon/purchase_course.svg')}}" alt="not found" style="height: 160px; width: 160px">
-                                            <h3 class="mt-3">Assigned Course</h3>
-                                            <p>Unfortunately, There is no assigned course. Check out our latest offerings!</p>
+                                            <h3 class="mt-3">Purchase Course</h3>
+                                            <p>Unfortunately, There is no purchase course. Check out our latest offerings!</p>
                                             <a href="{{ route('index', ['scroll' => 'true']) }}" width="20;" class="btn btn-primary">Start Learning</a>
                                         </div>
                                     </div>
@@ -686,6 +669,19 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="height: 81vh;">
+                    <div class="modal-body p-0" style="height: 100%;">
+                        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen
+                                style="width: 100%; height: 100%; object-fit: cover; border: none;"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 
@@ -997,4 +993,19 @@
         }
     });
 </script>
+
+<script>
+   $(document).ready(function() {
+    $('.openVideoModal').on('click', function() {
+        var videoUrl = $(this).data('video-url');
+        $('#videoModal iframe').attr('src', videoUrl);
+        // $('#videoModal')[0].load();
+        $('#videoModal').modal('show');
+    });
+
+    $('#videoModal').on('hidden.bs.modal', function () {
+        $('#videoModal')[0].pause();
+    });
+});
+    </script>
 @endsection

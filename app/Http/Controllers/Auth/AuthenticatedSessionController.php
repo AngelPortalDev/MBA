@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         if ($request->has('honeypot') && !empty($request->input('honeypot'))) {
             return redirect()->back()->with('error', 'Bot detected!');
         }
-        
+
         // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
         //     'secret' => env('GOOGLE_SECRET_KEY'),
         //     'response' => $request->input('g-recaptcha-response'),
@@ -135,41 +135,41 @@ class AuthenticatedSessionController extends Controller
                     return redirect()->intended($url)->with('statusEmail', $email);
                 }else{
 
-                    if (session()->has('intended_action_wishlist')){
-                        $response = App::call('App\Http\Controllers\CartController@addWishlist');
-                        $decodedResponse = json_decode($response, true);
-                        session()->forget('intended_action_wishlist'); // Clear the session after use
-                        session()->forget('form_data'); // Clear the session after use
-                        // Store the decoded response in the session, like title, message, and icon
-                        session()->flash('response_data', [
-                            'title' => $decodedResponse['title'] ?? $decodedResponse['title'],
-                            'message' => $decodedResponse['message'] ?? $decodedResponse['message'],
-                            'icon' => $decodedResponse['icon'] ?? 'success' // Use 'success', 'error', etc.
-                        ]);
+                    // if (session()->has('intended_action_wishlist')){
+                    //     $response = App::call('App\Http\Controllers\CartController@addWishlist');
+                    //     $decodedResponse = json_decode($response, true);
+                    //     session()->forget('intended_action_wishlist'); // Clear the session after use
+                    //     session()->forget('form_data'); // Clear the session after use
+                    //     // Store the decoded response in the session, like title, message, and icon
+                    //     session()->flash('response_data', [
+                    //         'title' => $decodedResponse['title'] ?? $decodedResponse['title'],
+                    //         'message' => $decodedResponse['message'] ?? $decodedResponse['message'],
+                    //         'icon' => $decodedResponse['icon'] ?? 'success' // Use 'success', 'error', etc.
+                    //     ]);
 
-                        return redirect('/');
-                    }
-                    if (session()->has('intended_action_cart')){
+                    //     return redirect('/');
+                    // }
+                    // if (session()->has('intended_action_cart')){
 
-                        $response = App::call('App\Http\Controllers\CartController@addtocart');
-                        $decodedResponse = json_decode($response, true);
-                        session()->forget('intended_action_cart'); // Clear the session after use
-                        session()->forget('form_data'); // Clear the session after use
-                        session()->flash('response_data', [
-                            'title' => $decodedResponse['title'] ?? $decodedResponse['title'],
-                            'message' => $decodedResponse['message'] ?? $decodedResponse['message'],
-                            'icon' => $decodedResponse['icon'] ?? 'success' // Use 'success', 'error', etc.
-                        ]);
-                        return redirect('/');
-                    }
+                    //     $response = App::call('App\Http\Controllers\CartController@addtocart');
+                    //     $decodedResponse = json_decode($response, true);
+                    //     session()->forget('intended_action_cart'); // Clear the session after use
+                    //     session()->forget('form_data'); // Clear the session after use
+                    //     session()->flash('response_data', [
+                    //         'title' => $decodedResponse['title'] ?? $decodedResponse['title'],
+                    //         'message' => $decodedResponse['message'] ?? $decodedResponse['message'],
+                    //         'icon' => $decodedResponse['icon'] ?? 'success' // Use 'success', 'error', etc.
+                    //     ]);
+                    //     return redirect('/');
+                    // }
                     
-                    if (session()->has('intended_url') && session()->has('form_data')) {   
-                        $formData =  session('form_data');              
-                        $redirectUrl = session('intended_url');
-                        session()->forget('intended_url'); // Clear the session after use
-                        return redirect()->intended('checkout')->with('formData', $formData);
-                    }
-                    return redirect('/');
+                    // if (session()->has('intended_url') && session()->has('form_data')) {   
+                    //     $formData =  session('form_data');              
+                    //     $redirectUrl = session('intended_url');
+                    //     session()->forget('intended_url'); // Clear the session after use
+                    //     return redirect()->intended('checkout')->with('formData', $formData);
+                    // }
+                    // return redirect('/');
                 }
             }
 
@@ -178,22 +178,22 @@ class AuthenticatedSessionController extends Controller
             $message = ['message' => 'Login Successfully', 'type' => 'success'];
 
                 $url = '';
-                
-                if ($request->user()->role === 'admin' || $request->user()->role === "superadmin" || $request->user()->role === "sales" ) { 
-                    $url = 'admin/dashboard';
-                } elseif ($request->user()->role === 'user') {
-                    $url = '';
-                } elseif ($request->user()->role === 'instructor') {
-                    $url =  'ementor/e-mentor-courses';
-                } elseif ($request->user()->role === 'sub-instructor') {
-                    $url =  'sub-ementor/sub-e-mentor-dashboard';
-                } elseif ($request->user()->role === 'institute') {
-                    $url = 'institute/institute-dashboard';
-                }
+                    if ($request->user()->role === 'admin' || $request->user()->role === "superadmin" || $request->user()->role === "sales" ) { 
+                        $url = 'admin/admin';
+                    } elseif ($request->user()->role === 'user') {
+                        $url = 'student/student-my-learning';
+                    } elseif ($request->user()->role === 'instructor') {
+                        $url =  'ementor/e-mentor-courses';
+                    } elseif ($request->user()->role === 'sub-instructor') {
+                        $url =  'sub-ementor/sub-e-mentor-dashboard';
+                    } elseif ($request->user()->role === 'institute') {
+                        $url = 'institute/institute-dashboard';
+                    }
+
                 $request->user()->update([
                     'last_seen' => now(),
                 ]);
-                
+
                 return redirect()->intended($url)->with($message);
         } else {
             $message = ['message' => 'Please Try Again', 'type' => 'error'];

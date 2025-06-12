@@ -91,6 +91,8 @@ if (!function_exists('getPaidCourse')) {
                     'user.id as userId',
                     'ord.id as orderId',
                     'cm.course_thumbnail_file',
+                    'cm.bn_course_trailer_url',
+                    'cm.podcast_thumbnail_file',
                     'scm.course_expired_on',
                     'scm.exam_remark',
                     'scm.exam_attempt_remain',
@@ -98,10 +100,12 @@ if (!function_exists('getPaidCourse')) {
                     'cm.ects',
                     'scm.course_progress',
                     'scm.id as scmId',
+                    'course_other_videos.bn_video_url_id'
                     // 'scm.preference_status',
                     // 'scm.preference_id',
                     // DB::raw("$adjustedExpiryCondition as adjusted_expiry")
                 )
+                ->leftJoin('course_other_videos','course_other_videos.course_master_id','=','cm.id')
                 ->leftJoin('orders as ord', 'ord.course_id', '=', 'cm.id')
                 ->leftJoin('users as user', 'ord.user_id', '=', 'user.id')
                 ->leftJoin('student_course_master as scm', function ($join) {

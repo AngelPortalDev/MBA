@@ -487,7 +487,7 @@
                                                                     !empty($data['other_video'][0]['bn_video_url_id']) &&
                                                                     !empty($data['other_video'][0]['video_type']) &&
                                                                     $data['other_video'][0]['video_type'] === '1')
-                                                                <div class="d-flex justify-content-center align-items-center cursor-pointer rounded border-white border rounded-3 bg-cover openVideoModal" data-videourl ="https://iframe.mediadelivery.net/embed/{{ env('AWARD_LIBRARY_ID') }}/{{ $data['other_video'][0]['bn_video_url_id'] }}"
+                                                                <div class="d-flex justify-content-center align-items-center cursor-pointer rounded border-white border rounded-3 bg-cover openVideoModal" data-videourl ="https://iframe.mediadelivery.net/embed/{{env('AWARD_LIBRARY_ID')}}/{{ $data['bn_course_trailer_url'] }}?autoplay=true" 
                                                                     style="position: relative; overflow: hidden;">
                                                                     <img src="{{Storage::url($data['podcast_thumbnail_file'])}}" alt="Trailer Thumbnail" 
                                                                     style="width: 100%; height: 100%; object-fit: cover;">
