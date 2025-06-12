@@ -30,11 +30,11 @@ class RedirectIfAuthenticated
                 } elseif (Auth::check() && Auth::user()->role === 'institute') {
                     return redirect('institute/dashboard');
                 } elseif (Auth::check() && Auth::user()->role === 'admin') {
-                    return redirect('admin/dashboard');
+                    return redirect('admin/admin');
                 } elseif (Auth::check() && Auth::user()->role === 'superadmin') {
-                    return redirect('admin/dashboard');
+                    return redirect('admin/admin');
                 } elseif (Auth::check() && Auth::user()->role === 'sales') {
-                    return redirect('admin/dashboard');
+                    return redirect('admin/admin');
                 }
 
                 // return redirect(RouteServiceProvider::HOME);

@@ -34,11 +34,11 @@ class Role
         } elseif ($role_name === 'institute' && $role !== 'institute') {
             return redirect('/institute/dashboard');
         } else if ($role_name === 'admin' && $role !== 'admin')  {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/admin');
         } else if ($role_name === 'superadmin' && !in_array($role, ['admin','superadmin','sales'])) {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/admin');
         } else if ($role_name === 'sales' && !in_array($role, ['admin','superadmin','sales'])) {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/admin');
         }
         return $next($request);
     }
